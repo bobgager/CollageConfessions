@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+
+        <!--Framework and Plugin CSS-->
+
+        <link rel="stylesheet" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="frameworks/framework7-1.6.5/css/framework7.ios.min.css">
+
+        <link rel="stylesheet" href="plugins/framework7.3dpanels_1.0.0/framework7.3dpanels.min.css">
+
+
+        <!--the mAlpha css-->
+        <link rel="stylesheet" href="css/malpha_app.css">
+        <link rel="stylesheet" href="css/malphaOveride.css">
+
+
+        <!--our custom css-->
+        <link rel="stylesheet" href="css/custom_app.css">
+
+        <title>Collage Confessions</title>
+
+    </head>
+    <body>
+
+
+        <div class="statusbar-overlay"></div>
+
+        <div class="panel-overlay"></div>
+
+        <!-- Right panel -->
+        <div class="panel panel-right panel-reveal">
+            <div class="line"></div>
+
+            <div class="user-banner">
+                    <span class="ava-box" style="background-color: #ffffff; width: 84px; height: 100px">
+                        <!--<img src="img/ava4.jpg" alt="">-->
+                        <img src="img/logo.png" alt="" style="height: 100%; width: 100%">
+                    </span>
+            </div>
+
+
+            <div class="welcome-msg">
+                <h3 id="rightPanelGreeting">Hello !</h3>
+                <h4>Hope your day is going well</h4>
+            </div>
+
+            <div class="list-block mt-15">
+                <div class="list-group">
+                    <nav>
+                        <ul>
+
+
+                            <li>
+                                <div class="line"></div>
+                            </li>
+                            
+                            <li>
+                                <a href="pages/home.html" class="item-link close-panel item-content">
+                                    <div class="item-media">
+                                        <i class="fa fa-home"></i>
+                                    </div>
+                                    <div class="item-inner">
+                                        <div class="item-title">Home</div>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <li>
+                                <div class="line"></div>
+                            </li>
+
+                            <li>
+                                <a href="pages/settings.html" class="item-link close-panel item-content">
+                                    <div class="item-media">
+                                        <i class="fa fa-cog"></i>
+                                    </div>
+                                    <div class="item-inner">
+                                        <div class="item-title">Settings</div>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <li>
+                                <div class="line"></div>
+                            </li>
+
+                            <li>
+                                <a href="pages/about.html" class="item-link close-panel item-content">
+                                    <div class="item-media">
+                                        <i class="fa fa-info"></i>
+                                    </div>
+                                    <div class="item-inner">
+                                        <div class="item-title">About College Confessions</div>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <li>
+                                <div class="line"></div>
+                            </li>
+
+                            <li>
+                                <a href="pages/developer.html" class="item-link close-panel item-content" style="color: red;">
+                                    <div class="item-media">
+                                        <i class="fa fa-cog"></i>
+                                    </div>
+                                    <div class="item-inner">
+                                        <div class="item-title">Developer</div>
+                                    </div>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </nav>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Views -->
+        <div class="views">
+            <div class="view view-main">
+
+                <!-- Top Navbar-->
+                <div class="navbar">
+                    <!-- Navbar inner for Index page-->
+                    <div data-page="index" class="navbar-inner">
+                        <!-- We have home navbar without left link-->
+                        <div class="center sliding">Collage Confessions</div>
+                    </div>
+
+                </div>
+
+
+
+                <div class="pages ">
+                    <div data-page="index" class="page navbar-fixed page-index-bg " >
+
+                        <div class="page-content">
+                            <br><br>
+                            <div class="well">
+                                <div class="text-center" onclick="app.onDeviceReady()"><img src="img/logo.png"></div>
+                                <h1 id="index_LoadingMessage" class="text-center" >Loading<br>College Confessions<br><i class="fa fa-spin fa-spinner"></i></h1>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!--Popovers-->
+        <!--need to put all the popovers here, and not on each page so they don't get darkened as part of the page-->
+        <!-- Configuration Code : used on configure page -->
+<!--        <div class="popover popover-configCode">
+            <div class="popover-angle"></div>
+            <div class="popover-inner">
+                <div class="content-block">
+                    <p><strong>Configuration Code</strong></p>
+                    <p style="font-size: smaller">A Configuration Codes lets iQueue Mobile know which iQueue installation you want to connect to.</p>
+                    <p style="font-size: smaller">You can get a Configuration Code from the iQueue Administrator, or have one sent to you by tapping Get One.</p>
+                </div>
+            </div>
+        </div>-->
+
+
+        <!--some application frameworks-->
+        <script type="text/javascript" src="frameworks/jquery-2.1.4.min.js"></script>
+
+        <script type="text/javascript" src="frameworks/framework7-1.6.5/js/framework7.min.js"></script>
+
+        <!--the Amazon AWS SDK (includes DynamoDB)-->
+        <script type="text/javascript" src="frameworks/aws-sdk-2.2.39.min.js"></script>
+
+        <!--some 3rd party plug-ins-->
+        <script type="text/javascript" src="plugins/framework7.3dpanels_1.0.0/framework7.3dpanels.js"></script>
+        <script type="text/javascript" src="plugins/jquery_validate_1.13.1/jquery.validate.min.js"></script>
+        <script type="text/javascript" src="plugins/jstorage.min.js"></script>
+
+        <!--phonegap-->
+        <script type="text/javascript" src="cordova.js"></script>
+
+        <!--our apps javascript files-->
+        <script type="text/javascript" src="js/globals.js"></script>
+
+        <script type="text/javascript" src="js/utilities/awsconnector.js"></script>
+
+        <script type="text/javascript" src="js/utilities/cobaltfireutils.js"></script>
+
+        <script type="text/javascript" src="js/index.js"></script>
+
+        <!--scripts for the pages (needs to come after the index.js file)-->
+        <script type="text/javascript" src="pages/configure.js"></script>
+        <script type="text/javascript" src="pages/settings.js"></script>
+        <script type="text/javascript" src="pages/home.js"></script>
+        <script type="text/javascript" src="pages/home_location.js"></script>
+        <script type="text/javascript" src="pages/about.js"></script>
+        <script type="text/javascript" src="pages/selectCategory.js"></script>
+        <script type="text/javascript" src="pages/selectSubCategory.js"></script>
+        <script type="text/javascript" src="pages/otherQuestion.js"></script>
+        <script type="text/javascript" src="pages/collectName.js"></script>
+        <script type="text/javascript" src="pages/summary.js"></script>
+        <script type="text/javascript" src="pages/inLine.js"></script>
+        <script type="text/javascript" src="pages/developer.js"></script>
+
+        <script type="text/javascript">
+            app.initialize();
+        </script>
+
+
+
+    </body>
+</html>
