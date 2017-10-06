@@ -1,1 +1,2 @@
 # CollageConfessions
+# Go Away
