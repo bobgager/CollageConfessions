@@ -1,0 +1,63 @@
+<div class="navbar">
+    <div class="navbar-inner">
+        <div class="left">
+            <a href="#" class="back link"> <i class="fa fa-angle-left"></i><span>Back</span></a>
+        </div>
+        <div class="center sliding">DEVELOPER STUFF</div>
+        <div class="right">
+            <a href="#" class="link icon-only open-panel" data-panel="right">
+                <span class="topNavBarRightIcon kkicon fa fa-bars"></span>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+<!-- Pages -->
+<div class="pages">
+    <div class="page navbar-fixed" data-page="developer">
+        <div class="page-content">
+
+            <div class="text-center mt-40">
+                <h1>
+                    Developer Stuff
+                </h1>
+            </div>
+
+            <div class="list-block inset">
+                <ul>
+                    <li>
+                        <a href="index.html" class="item-link list-button">Go To Index</a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="window.location.href = 'https://build.phonegap.com/apps/678869/install/XYxtYk78srzFZj8ACnu9' " class="item-link list-button">Update From PhoneGap</a>
+                    </li>
+                    <li>
+                        <a href="#" class="item-link list-button developer-ResetConfig-BTN">Clear Config Code Storage</a>
+                    </li>
+                    <li>
+                        <a href="#" class="item-link list-button" onclick="app.resumeApp()">Simulate Resume</a>
+                    </li>
+                    <li>
+                        <a href="#" class="item-link item-content">
+                            <div class="item-inner">
+                                Status Bar Color:
+                                <input id="developer_newStatusBarColor" type="text" value="#">
+                                <div class="item-after" onclick="StatusBar.overlaysWebView(false);StatusBar.backgroundColorByHexString($('#developer_newStatusBarColor').val());">Apply</div>
+                            </div>
+                        </a>
+                    </li>
+
+
+
+                </ul>
+            </div>
+
+        </div><!--end of page content-->
+    </div>
+</div>
+
+
+
+
+
