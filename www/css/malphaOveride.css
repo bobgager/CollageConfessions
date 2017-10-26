@@ -5,13 +5,10 @@ body {
     background-size: 100% 100%;
 }
 
+
 .page-bg {
-    background: url("../img/in-line_light.jpg") no-repeat top center/cover transparent;
-    background-color: white;
-}
-.page-index-bg {
-    background: url("../img/creepypriest.jpg") no-repeat top center/cover transparent;
-    background-color: white;
+    background: url("../img/creepypriest.jpg") no-repeat bottom center/contain transparent;
+    background-color: black;
 }
 
 h1 {
@@ -43,4 +40,8 @@ h1 {
 
 .panel .line {
     background: rgba(0,0,0,.2);
+}
+
+.toolbar .link {
+    color: #000000;
 }

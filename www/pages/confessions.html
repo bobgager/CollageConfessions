@@ -1,0 +1,57 @@
+
+<!-- We don't need full layout here, because this page will be parsed with Ajax-->
+<!-- Top Navbar-->
+<div class="navbar">
+    <div class="navbar-inner">
+
+        <!--<div class="left"><a href="#" class="back link"> <i class="icon icon-back"></i><span>Back</span></a></div>-->
+
+        <div class="center sliding">Collage Confessions Pro</div>
+
+        <div class="right">
+            <a href="#" class="link icon-only open-panel" data-panel="right">
+                <span class="topNavBarRightIcon kkicon fa fa-bars"></span>
+            </a>
+        </div>
+
+<!--        &lt;!&ndash; Sub navbar &ndash;&gt;
+        <div class="subnavbar">
+            <div class="text-center subnavbarInstructions" >
+                Please Select A Location
+            </div>
+        </div>-->
+
+    </div>
+</div>
+
+<!-- Pages -->
+<div class="pages">
+    <div class="page navbar-fixed " data-page="confessions">
+
+        <div class="toolbar ">
+            <div class="toolbar-inner " >
+                <a href="#" class="link" ></a>
+                <a href="pages/confess.html" class="link " onclick="confessionsPage.confess()">CONFESS</a>
+                <a href="#" class="link"></a>
+            </div>
+        </div>
+
+        <div id="homePageContent" class="page-content page-bg pull-to-refresh-content" >
+
+            <div class="pull-to-refresh-layer">
+                <div class="preloader"></div>
+                <div class="pull-to-refresh-arrow"></div>
+            </div>
+
+            <div class="list-block " style="margin: 10px">
+
+                <ul id="confessionList" >
+                    <!--generated confessions will get inserted here-->
+                </ul>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+

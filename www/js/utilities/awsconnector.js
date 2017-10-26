@@ -42,29 +42,42 @@ var awsConnector = {
             //console.log('fetchAppConfig ' + err);
             if (err){
                 //console.log(err); // an error occurred
+                callback(false, err);
 
-                myApp.modal({
-                    title:  'DOH!',
-                    text: 'There was an error communicating with our server.<br><br>Please check that you are connected to the internet and launch iQueue Mobile again.<br><br>(Error Code: fac001)',
-                    buttons: [
-                        {
-                            text: 'Try Again',
-                            bold: true,
-                            onClick: function() {
-                                awsConnector.fetchAppConfig(callback);
-                            }
-                        }
-                    ]
-                });
             }
             else {
                 // successful response
-                globals.AppConfiguration = data.Items[0];
-                callback();
+                callback(true, data.Items[0]);
             }
         });
 
     },
+
+    //******************************************************************************************************************
+    fetchConfessions: function (collegeID, callback) {
+
+        var params = {
+            TableName: 'cc_confessions',
+            KeyConditionExpression: 'collegeID = :collegeID ',
+            ExpressionAttributeValues: {
+                ':collegeID': collegeID
+            }
+        };
+
+        this.dynamodbEast.query(params, function(err, data) {
+            //console.log('fetchAppConfig ' + err);
+            if (err){
+                //console.log(err); // an error occurred
+                callback(false, err);
+
+            }
+            else {
+                // successful response
+                callback(true, data.Items);
+            }
+        });
+
+    }
 
 
 
@@ -78,11 +91,11 @@ var awsConnector = {
 
 
 
+/*
 
 
 
-
-    //******************************************************************************************************************
+    //!******************************************************************************************************************
     fetchCustomerConfigByConfigCode: function(configCode, callback){
 
 
@@ -135,7 +148,7 @@ var awsConnector = {
 
     },
 
-    //******************************************************************************************************************
+    //!******************************************************************************************************************
     fetchCustomerLocationsTable: function(callback){
 
         var params = {
@@ -174,7 +187,7 @@ var awsConnector = {
 
     },
 
-    //******************************************************************************************************************
+    //!******************************************************************************************************************
     fetchWaitTime: function(callback){
 
         var params = {
@@ -236,7 +249,7 @@ var awsConnector = {
 
     },
 
-    //******************************************************************************************************************
+    //!******************************************************************************************************************
     fetchFAQs: function(callback){
 
         //$('#sc_card_content_inner').html('inside awsConnector.fetchFAQs ');
@@ -269,7 +282,7 @@ var awsConnector = {
 
     },
 
-    //******************************************************************************************************************
+    //!******************************************************************************************************************
     saveQuestion: function(status,callback){
 
         //figure out the current date and time
@@ -333,7 +346,7 @@ var awsConnector = {
                                 //clear the guid
                                 globals.setPersistentGlobal('myguid','');
                                 //go home
-                                mainView.router.loadPage('pages/home.html');
+                                mainView.router.loadPage('pages/confessions.html');
                             }
                         },
                         {
@@ -355,7 +368,7 @@ var awsConnector = {
 
     },
 
-    //******************************************************************************************************************
+    //!******************************************************************************************************************
     fetchMyQuestion: function(callback){
 
 
@@ -402,7 +415,7 @@ var awsConnector = {
 
     },
 
-    //******************************************************************************************************************
+    //!******************************************************************************************************************
     validateDomain: function(usersEmail, callback){
 
         //show a busy indicator
@@ -455,6 +468,9 @@ var awsConnector = {
 
     }
 
+
+
+    */
     //******************************************************************************************************************
     //******************************************************************************************************************
     //******************************************************************************************************************

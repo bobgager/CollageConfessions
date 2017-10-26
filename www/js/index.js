@@ -100,32 +100,54 @@ var app = {
     /******************************************************************************************************************/
     initializeCloud: function() {
 
-        //and initialize AWS
+        //initialize AWS
         awsConnector.initializeAWS(app.fetchAppParameters);
-
-
 
     },
 
     /******************************************************************************************************************/
     fetchAppParameters: function(){
 
-        //and fetch the configuration parameters
-        awsConnector.fetchAppConfig(app.appParametersReturned);
+        //fetch the configuration parameters
+        awsConnector.fetchAppConfig(app.appConfigReturned);
 
         //need to wait until we have config, or a failure to get config before proceeding
     },
 
     /******************************************************************************************************************/
-    appParametersReturned: function () {
+    appConfigReturned: function (success, data) {
+
+        if (!success){
+            //there was an error reading the app configuration
+
+            myApp.modal({
+                title:  'DOH!',
+                text: 'There was an error communicating with The Cloud.<br><br>Please check that you are connected to the internet and launch College Confessions again.<br><br>(Error Code: acr_001)<br>' + data,
+                buttons: [
+                    {
+                        text: 'Try Again',
+                        bold: true,
+                        onClick: function() {
+                            awsConnector.fetchAppConfig(app.appConfigReturned);
+                        }
+                    }
+                ]
+            });
+
+            return ;
+
+        }
+
+
+        globals.AppConfiguration = data;
 
         //check to make sure we can run this version
-        cobaltfireUtils.testVersion(app.initializeiQueue);
+        cobaltfireUtils.testVersion(app.initializeApp);
 
     },
 
     /******************************************************************************************************************/
-    initializeiQueue: function(okToRun) {
+    initializeApp: function(okToRun) {
 
         //test to make sure this version can be run
        if( !okToRun){
@@ -136,13 +158,12 @@ var app = {
         //OK to proceed
 
         //pull in the persistent globals from long term storage
-        globals.initPersistentGlobals();
+        //globals.initPersistentGlobals();
 
         $('#rightPanelGreeting').html('Hello ' + globals.userFirstName );
 
-        //do a time check so we can calibrate the clock to the server time
-         var now = cobaltfireUtils.calibratedDateTime();
-
+        mainView.router.loadPage({url: 'pages/confessions.html', animatePages: false});
+        return;
 
         //show the appropriate page depending on the config code
 
@@ -190,7 +211,7 @@ var app = {
             mainView.router.loadPage({url: thePage, animatePages: false});
         }
         else{
-            mainView.router.loadPage({url: 'pages/home.html', animatePages: false});
+            mainView.router.loadPage({url: 'pages/confessions.html', animatePages: false});
 
         }
     }

@@ -8,11 +8,6 @@ myApp.onPageInit('about', function (page) {
 
 myApp.onPageBeforeAnimation('about', function(page) {
 
-    //customize the app skin for this customer
-    cobaltfireUtils.setCustomSkin();
-
-    clearTimeout(inLinePage.inlineTimer);
-    clearTimeout(homeLocationPage.waitTimeTimer);
 
     //show the version number
     $('#aboutVersionString').html('Version: ' + globals.version);

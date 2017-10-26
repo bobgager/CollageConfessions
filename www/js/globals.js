@@ -1,7 +1,7 @@
 
 var globals = {
 
-    version: 0.001,
+    version: 0.002,
 
     //localDev is programatically set to indicate we're running in a browser
     localDev: false,
@@ -16,6 +16,7 @@ var globals = {
     /*Everything below can be deleted once things are working as they are from iQueue Mobile*/
     //******************************************************************************************************************
 
+/*
 
 
 
@@ -60,7 +61,7 @@ var globals = {
     //holds the ID of the users open question in the database
     myQuestionID:   null,
 
-    //******************************************************************************************************************
+    //!******************************************************************************************************************
     initPersistentGlobals: function(){
         //pull all the persistent globals out of persistent storage
 
@@ -80,7 +81,7 @@ var globals = {
         globals.myQuestionID = $.jStorage.get('myQuestionID');
     },
 
-    //******************************************************************************************************************
+    //!******************************************************************************************************************
     setPersistentGlobal: function(globalName, globalValue){
 
         switch(globalName) {
@@ -136,5 +137,6 @@ var globals = {
 
 
     }
+*/
 
 };

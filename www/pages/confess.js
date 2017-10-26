@@ -1,27 +1,17 @@
 
-myApp.onPageInit('home', function (page) {
+myApp.onPageInit('confess', function (page) {
 
-    //watch for these events
+    //Events to watch
+
+});
+
+myApp.onPageBeforeAnimation('confess', function(page) {
 
 
 
 });
 
-myApp.onPageBeforeAnimation('home', function(page) {
-
-
-
-});
-
-myApp.onPageAfterAnimation('home', function(page) {
-
-
-
-
-});
-
-var homePage = {
-
+var confessPage = {
 
     //******************************************************************************************************************
 
