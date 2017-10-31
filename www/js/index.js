@@ -91,7 +91,8 @@ var app = {
 
         //TODO at some point, record a launch heartbeat so we can see how many folks are using College Confessions
 
-
+        //initialize any persistant global variables
+        globals.initPersistentGlobals();
 
 
         app.initializeCloud();
@@ -137,7 +138,6 @@ var app = {
             return ;
 
         }
-
 
         globals.AppConfiguration = data;
 
