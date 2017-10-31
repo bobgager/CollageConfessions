@@ -162,58 +162,9 @@ var app = {
 
         $('#rightPanelGreeting').html('Hello ' + globals.userFirstName );
 
-        mainView.router.loadPage({url: 'pages/confessions.html', animatePages: false});
-        return;
+        mainView.router.loadPage({url: 'pages/confessions.html', animatePages: true});
 
-        //show the appropriate page depending on the config code
 
-        if(!globals.configCode || globals.configCode === ''){
-            //load up the configure page
-            mainView.router.loadPage('pages/configure.html');
-            return;
-        }
-
-        //we have a config code
-        //so fetch the customer info for it
-        //parseConnector.fetchCustomerByCode(globals.configCode, 'launch', app.customerReturned);
-        awsConnector.fetchCustomerConfigByConfigCode(globals.configCode, app.customerReturned)
-
-    },
-
-    /******************************************************************************************************************/
-    customerReturned: function(validCustomer){
-        if(validCustomer){
-
-            //replace the loading message in case the user ever uses the Back button to get back to the Index page
-            $('#index_LoadingMessage').html('<p><a href="#" class="button" onclick="app.onDeviceReady();">Get Started</a></p>');
-
-            //if there's a myguid, then this user is already in line
-            if(globals.myguid != ''){
-                //switch to the In Line View after getting the locations
-                awsConnector.fetchCustomerLocationsTable(function(){mainView.router.loadPage({url: 'pages/inLine.html', animatePages: false});});
-                return;
-            }
-
-            //fetch the locations for this customer
-            awsConnector.fetchCustomerLocationsTable(app.locationsReturned);
-
-            return;
-        }
-        mainView.router.loadPage({url: 'pages/configure.html', animatePages: false});
-    },
-
-    /******************************************************************************************************************/
-    locationsReturned: function(){
-        //let's see if there's only one location
-        if(globals.theLocationsArray.length === 1){
-            //only one location, so let's auto pick it
-            var thePage = 'pages/home_location.html?location='+ globals.theLocationsArray[0].locationID;
-            mainView.router.loadPage({url: thePage, animatePages: false});
-        }
-        else{
-            mainView.router.loadPage({url: 'pages/confessions.html', animatePages: false});
-
-        }
     }
 
     /******************************************************************************************************************/

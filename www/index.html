@@ -17,13 +17,16 @@
         <link rel="stylesheet" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 
         <link rel="stylesheet" href="frameworks/framework7-1.6.5/css/framework7.ios.min.css">
+        <link rel="stylesheet" href="frameworks/framework7-1.6.5/css/framework7.ios.colors.min.css">
 
         <link rel="stylesheet" href="plugins/framework7.3dpanels_1.0.0/framework7.3dpanels.min.css">
 
+        <link rel="stylesheet" href="css/right_menu.css">
+
 
         <!--the mAlpha css-->
-        <link rel="stylesheet" href="css/malpha_app.css">
-        <link rel="stylesheet" href="css/malphaOveride.css">
+<!--        <link rel="stylesheet" href="css/malpha_app.css">
+        <link rel="stylesheet" href="css/malphaOveride.css">-->
 
 
         <!--our custom css-->
@@ -32,7 +35,7 @@
         <title>Collage Confessions Pro</title>
 
     </head>
-    <body>
+    <body class="layout-dark">
 
 
         <div class="statusbar-overlay"></div>
@@ -58,7 +61,7 @@
             <div class="list-block mt-15">
                 <div class="list-group">
                     <nav>
-                        <ul>
+                        <ul class="menu-items">
 
 
                             <li>
@@ -138,22 +141,28 @@
                     <!-- Navbar inner for Index page-->
                     <div data-page="index" class="navbar-inner">
                         <!-- We have some navbar without left link-->
-                        <div class="center sliding">Collage Confessions Pro</div>
+                        <div class="center sliding"></div>
                     </div>
 
                 </div>
 
 
 
-                <div class="pages ">
-                    <div data-page="index" class="page navbar-fixed page-bg " >
+                <div class="pages " >
+                    <div data-page="index" class="page navbar-fixed  " >
 
-                        <div class="page-content">
-                            <br><br>
-                            <div class="well">
-                                <div class="text-center" onclick="app.onDeviceReady()"><img src="img/logo.png"></div>
-                                <h1 id="index_LoadingMessage" class="text-center" >Loading<br>College Confessions<br><i class="fa fa-spin fa-spinner"></i></h1>
+                        <div class="page-content page-index" >
+
+                            <br>
+                            <br>
+
+                            <div class="center-wrapper">
+                                <div class="centered-div">
+                                    <h1 id="index_LoadingMessage" >Loading<br>College Confessions<br><br><i class="fa fa-2x fa-spin fa-spinner"></i></h1>
+                                </div>
                             </div>
+
+
                         </div>
 
                     </div>

@@ -1,0 +1,242 @@
+
+.menu-items {
+    font-size: 15px;
+}
+
+
+/* =========================================== */
+/*    8. USER PROFILE                          */
+/* =========================================== */
+.user-banner {
+    position: relative;
+    height: 70px;
+    text-align: center;
+    /** To edit this background, follow this link:
+    http://svgeneration.com/generate/GPlay?height=3&width=3&background=dbdbdb&overlay=ffffff&weight=15&padding=0.2&
+    */
+
+    background-color: #0084ff;
+    background-image:url(data:image/svg+xml;base64,CiAgPHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMDAlJyBoZWlnaHQ9JzEwMCUnPgogICAgPHJlY3Qgd2lkdGg9JzEwMDAlJyBoZWlnaHQ9JzEwMDAlJyBmaWxsPScjZmZmJy8+CiAgICA8cmVjdCB3aWR0aD0nMTAwJScgaGVpZ2h0PScxMDAlJyBmaWxsPScjMDA4NGZmJy8+CiAgICA8c3ZnIHg9JzUwJScgeT0nNTAlJyBvdmVyZmxvdz0ndmlzaWJsZSc+CiAgICAgIDxyZWN0IHdpZHRoPScyMDAwJScgaGVpZ2h0PScyMDAwJScgZmlsbC1vcGFjaXR5PScwLjEnIGZpbGw9JyMwMDAnIHRyYW5zZm9ybT0ncm90YXRlKDIwKScvPgogICAgICA8cmVjdCB3aWR0aD0nMjAwMCUnIGhlaWdodD0nMjAwMCUnIGZpbGwtb3BhY2l0eT0nMC4xJyBmaWxsPScjMDAwJyB0cmFuc2Zvcm09J3JvdGF0ZSg0MCknLz4KICAgICAgPHJlY3Qgd2lkdGg9JzIwMDAlJyBoZWlnaHQ9JzIwMDAlJyBmaWxsLW9wYWNpdHk9JzAuMScgZmlsbD0nIzAwMCcgdHJhbnNmb3JtPSdyb3RhdGUoNjApJy8+CiAgICAgIDxyZWN0IHdpZHRoPScyMDAwJScgaGVpZ2h0PScyMDAwJScgZmlsbC1vcGFjaXR5PScwLjEnIGZpbGw9JyMwMDAnIHRyYW5zZm9ybT0ncm90YXRlKDgwKScvPgogICAgICA8cmVjdCB3aWR0aD0nMjAwMCUnIGhlaWdodD0nMjAwMCUnIGZpbGwtb3BhY2l0eT0nMC4xJyBmaWxsPScjMDAwJyB0cmFuc2Zvcm09J3JvdGF0ZSgxMDApJy8+CiAgICAgIDxyZWN0IHdpZHRoPScyMDAwJScgaGVpZ2h0PScyMDAwJScgZmlsbC1vcGFjaXR5PScwLjEnIGZpbGw9JyMwMDAnIHRyYW5zZm9ybT0ncm90YXRlKDEyMCknLz4KICAgICAgPHJlY3Qgd2lkdGg9JzIwMDAlJyBoZWlnaHQ9JzIwMDAlJyBmaWxsLW9wYWNpdHk9JzAuMScgZmlsbD0nIzAwMCcgdHJhbnNmb3JtPSdyb3RhdGUoMTQwKScvPgogICAgICA8cmVjdCB3aWR0aD0nMjAwMCUnIGhlaWdodD0nMjAwMCUnIGZpbGwtb3BhY2l0eT0nMC4xJyBmaWxsPScjMDAwJyB0cmFuc2Zvcm09J3JvdGF0ZSgxNjApJy8+CiAgICAgIDxyZWN0IHdpZHRoPScyMDAwJScgaGVpZ2h0PScyMDAwJScgZmlsbC1vcGFjaXR5PScwLjEnIGZpbGw9JyMwMDAnIHRyYW5zZm9ybT0ncm90YXRlKDE4MCknLz4KICAgICAgPHJlY3Qgd2lkdGg9JzIwMDAlJyBoZWlnaHQ9JzIwMDAlJyBmaWxsLW9wYWNpdHk9JzAuMScgZmlsbD0nIzAwMCcgdHJhbnNmb3JtPSdyb3RhdGUoMjAwKScvPgogICAgICA8cmVjdCB3aWR0aD0nMjAwMCUnIGhlaWdodD0nMjAwMCUnIGZpbGwtb3BhY2l0eT0nMC4xJyBmaWxsPScjMDAwJyB0cmFuc2Zvcm09J3JvdGF0ZSgyMjApJy8+CiAgICAgIDxyZWN0IHdpZHRoPScyMDAwJScgaGVpZ2h0PScyMDAwJScgZmlsbC1vcGFjaXR5PScwLjEnIGZpbGw9JyMwMDAnIHRyYW5zZm9ybT0ncm90YXRlKDI0MCknLz4KICAgICAgPHJlY3Qgd2lkdGg9JzIwMDAlJyBoZWlnaHQ9JzIwMDAlJyBmaWxsLW9wYWNpdHk9JzAuMScgZmlsbD0nIzAwMCcgdHJhbnNmb3JtPSdyb3RhdGUoMjYwKScvPgogICAgICA8cmVjdCB3aWR0aD0nMjAwMCUnIGhlaWdodD0nMjAwMCUnIGZpbGwtb3BhY2l0eT0nMC4xJyBmaWxsPScjMDAwJyB0cmFuc2Zvcm09J3JvdGF0ZSgyODApJy8+CiAgICAgIDxyZWN0IHdpZHRoPScyMDAwJScgaGVpZ2h0PScyMDAwJScgZmlsbC1vcGFjaXR5PScwLjEnIGZpbGw9JyMwMDAnIHRyYW5zZm9ybT0ncm90YXRlKDMwMCknLz4KICAgICAgPHJlY3Qgd2lkdGg9JzIwMDAlJyBoZWlnaHQ9JzIwMDAlJyBmaWxsLW9wYWNpdHk9JzAuMScgZmlsbD0nIzAwMCcgdHJhbnNmb3JtPSdyb3RhdGUoMzIwKScvPgogICAgICA8cmVjdCB3aWR0aD0nMjAwMCUnIGhlaWdodD0nMjAwMCUnIGZpbGwtb3BhY2l0eT0nMC4xJyBmaWxsPScjMDAwJyB0cmFuc2Zvcm09J3JvdGF0ZSgzNDApJy8+CiAgICAgIDxyZWN0IHdpZHRoPScyMDAwJScgaGVpZ2h0PScyMDAwJScgZmlsbC1vcGFjaXR5PScwLjEnIGZpbGw9JyMwMDAnIHRyYW5zZm9ybT0ncm90YXRlKDM2MCknLz4KCiAgICA8L3N2Zz4KICA8L3N2Zz4=);
+
+}
+.user-banner .ava-box {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-left: -38px;
+    margin-bottom: -38px;
+    width: 70px;
+    height: 70px;
+    display: inline-block;
+    border-radius: 10px;
+    background: #9c6e56;
+    line-height: 1;
+    padding: 3px;
+}
+.user-banner .ava-box img {
+    border-radius: 10px;
+    width: 70px;
+    height: 70px;
+    line-height: 1;
+}
+
+.welcome-msg {
+    margin-top: 48px;
+    text-align: center;
+    color: #ffffff;
+}
+.welcome-msg h3 {
+    margin: 0;
+    font-weight: normal;
+    font-family: 'open_sanslight', sans-serif;
+    color: #FFFFFF;
+}
+.welcome-msg h3 strong {
+    font-family: 'open_sanssemibold', sans-serif;
+}
+.welcome-msg h4 {
+    margin: 0;
+    font-weight: normal;
+    font-size: 12px;
+    color: #FFFFFF;
+}
+
+.ava-box {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-left: -38px;
+    margin-bottom: -38px;
+    width: 70px;
+    height: 70px;
+    display: inline-block;
+    border-radius: 10px;
+    background: #9c6e56;
+    line-height: 1;
+    padding: 3px;
+}
+.ava-box img {
+    border-radius: 10px;
+    width: 70px;
+    height: 70px;
+    line-height: 1;
+}
+
+.user-profile-2 .big {
+    background: transparent;
+    bottom: 44px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    height: 87px;
+}
+.user-profile-2 .big .ava-box {
+    bottom: auto;
+    top: 0;
+    margin-top: -38px;
+}
+.user-profile-2 .big .options-2 a,
+.user-profile-2 .big .options a {
+    box-sizing: border-box;
+    display: block;
+    font-size: 14px;
+    line-height: 50px;
+    padding: 0 15px;
+    text-align: left;
+    width: 50%;
+    float: left;
+    border-bottom: 1px solid rgba(178, 137, 115, 0.6);
+    color: #FFFFFF;
+    border-right: 1px solid rgba(178, 137, 115, 0.6);
+    background: rgba(255, 255, 255, 0.3);
+}
+.user-profile-2 .big .options-2 a:last-child,
+.user-profile-2 .big .options a:last-child {
+    text-align: right;
+    border-right: none;
+}
+.user-profile-2 .big .options-2 a {
+    width: 33.3%;
+    text-align: center;
+    background: rgba(178, 137, 115, 0.3);
+    color: #ffffff;
+    border-color: rgba(178, 137, 115, 0.6);
+    line-height: 35px;
+    font-family: 'open_sanslight', sans-serif;
+}
+.user-profile-2 .big .options-2 a > span {
+    margin-right: 2px;
+}
+
+.user-profile .user-banner {
+    position: relative;
+    height: 70px;
+    text-align: center;
+}
+.user-profile .user-banner .ava-box {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-left: -38px;
+    margin-bottom: -38px;
+    width: 70px;
+    height: 70px;
+    display: inline-block;
+    border-radius: 10px;
+    background: #f0f0f0;
+    line-height: 1;
+    padding: 3px;
+}
+.user-profile .user-banner .ava-box img {
+    border-radius: 10px;
+    width: 70px;
+    height: 70px;
+    line-height: 1;
+}
+.user-profile .welcome-msg {
+    margin: 20px 15px 10px;
+    text-align: left;
+    color: #ffffff;
+}
+.user-profile .welcome-msg h3 {
+    margin: 0;
+    font-weight: normal;
+    font-family: 'open_sanslight', sans-serif;
+    color: #f0f0f0;
+}
+.user-profile .welcome-msg h3 strong {
+    font-family: 'open_sanssemibold', sans-serif;
+}
+.user-profile .welcome-msg h4 {
+    margin: 0;
+    font-weight: normal;
+    font-size: 12px;
+    color: #f0f0f0;
+}
+/*.user-profile .banner {
+    position: relative;
+    background: url("../img/bg-small-2-blur.jpg") no-repeat top center/cover transparent;
+    margin-top: -44px;
+    height: 340px;
+    color: #FFFFFF;
+}*/
+.user-profile .banner .ava-box {
+    position: relative;
+    padding-top: 80px;
+    text-align: center;
+    background: transparent;
+}
+.user-profile .banner .ava {
+    width: 80px;
+    padding: 3px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px -2px rgba(0, 0, 0, 0.2);
+}
+.user-profile .banner small {
+    display: block;
+    font-size: 12px;
+    font-family: 'robotomedium', sans-serif;
+}
+.user-profile .banner .balance {
+    position: relative;
+    text-align: center;
+    margin-top: 15px;
+}
+.user-profile .banner .balance div {
+    display: block;
+    font-size: 36px;
+    font-family: 'robotothin', sans-serif;
+    line-height: 1;
+}
+.user-profile .banner .balance div:before {
+    content: '$';
+    font-size: 24px;
+    letter-spacing: 3px;
+}
+.user-profile .banner .banner-bottom {
+    position: absolute;
+    width: 100%;
+    bottom: 10px;
+}
+.user-profile .banner .banner-bottom > :first-child {
+    padding-left: 15px;
+}
+.user-profile .banner .banner-bottom > :last-child {
+    padding-right: 15px;
+}
+.user-profile .banner .banner-bottom .badges svg {
+    width: 20px;
+}
+.user-profile .banner .banner-bottom .badges svg path {
+    fill: #ffffff;
+}
+/*
+.user-profile .sales-count {
+    font-size: 20px;
+    font-family: 'robotomedium', sans-serif;
+    line-height: 60px;
+}
+.user-profile .sales-count > div > div:nth-child(even) {
+    background-color: #bb9783;
+}*/

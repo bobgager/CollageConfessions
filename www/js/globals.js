@@ -1,10 +1,12 @@
 
 var globals = {
 
-    version: 2.043,
+    version: 2.044,
 
     //localDev is programatically set to indicate we're running in a browser
     localDev: false,
+
+    userFirstName: 'Anonymous',
 
     //holds various server based configuration values
     AppConfiguration: null,
