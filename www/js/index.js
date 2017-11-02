@@ -63,13 +63,19 @@ var app = {
     /******************************************************************************************************************/
     resumeApp:function(){
         mainView.router.loadPage('index.html');
-        app.initialize();
+        app.onDeviceReady();
     },
 
     /******************************************************************************************************************/
     // deviceready Event Handler
     onDeviceReady: function() {
         console.log('DeviceReady has fired');
+
+        if (!globals.localDev){
+            //set the color of the iOS Status Bar
+            StatusBar.backgroundColorByHexString('#000000');
+        }
+
 
         //track the launch event
         //get the device info
@@ -158,9 +164,17 @@ var app = {
         //OK to proceed
 
         //pull in the persistent globals from long term storage
-        //globals.initPersistentGlobals();
+        globals.initPersistentGlobals();
 
-        $('#rightPanelGreeting').html('Hello ' + globals.userFirstName );
+        $$('#rightPanelGreeting').html('Hello ' + globals.userFirstName );
+
+       if(globals.userSchool === 'All'){
+           $$('#menu_UserSchool').html('All Schools');
+       }
+       else {
+           $$('#menu_UserSchool').html(globals.userSchool);
+       }
+
 
         mainView.router.loadPage({url: 'pages/confessions.html', animatePages: true});
 

@@ -133,7 +133,15 @@ var confessionsPage = {
 
     //******************************************************************************************************************
     confess: function () {
-       console.log('CONFESS clicked')
+        //test to see if a school has been set
+        if (globals.userSchool === 'All'){
+
+            mainView.router.loadPage({url: 'pages/schools.html?choiceContext=confessing', animatePages: true});
+
+        }
+        else {
+            mainView.router.loadPage({url: 'pages/confess.html', animatePages: true});
+        }
     }
 
 
