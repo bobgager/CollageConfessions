@@ -71,7 +71,13 @@ var app = {
     onDeviceReady: function() {
         console.log('DeviceReady has fired');
 
+
+
         if (!globals.localDev){
+            myApp.showPreloader('Setting Title Bar Color')
+            setTimeout(function () {
+                myApp.hidePreloader();
+            }, 2000);
             //set the color of the iOS Status Bar
             StatusBar.backgroundColorByHexString('#000000');
         }
