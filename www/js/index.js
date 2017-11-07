@@ -62,8 +62,8 @@ var app = {
 
     /******************************************************************************************************************/
     resumeApp:function(){
-        mainView.router.loadPage('index.html');
-        app.onDeviceReady();
+        //mainView.router.loadPage('index.html');
+        //app.onDeviceReady();
     },
 
     /******************************************************************************************************************/
@@ -79,7 +79,10 @@ var app = {
                 myApp.hidePreloader();
             }, 2000);
             //set the color of the iOS Status Bar
-            StatusBar.backgroundColorByHexString('#000000');
+            //StatusBar.backgroundColorByHexString('#000000');
+            //using Framework7
+            //$('.statusbar-overlay' ).css( "background", globals.theLocationsArray[locationIndex].NavBarBackgroundColor );
+            //but, since it's always black, jsut do it with CSS in custom_app.css
         }
 
 
@@ -174,16 +177,40 @@ var app = {
 
         $$('#rightPanelGreeting').html('Hello ' + globals.userFirstName );
 
-       if(globals.userSchool === 'All'){
-           $$('#menu_UserSchool').html('All Schools');
+       if(globals.userSchool === '000'){
+           $$('#menu_UserSchool').html('Not Selected');
        }
        else {
            $$('#menu_UserSchool').html(globals.userSchool);
        }
 
 
-        mainView.router.loadPage({url: 'pages/confessions.html', animatePages: true});
+       //fetch the list of schools
+        awsConnector.fetchSchools(app.schoolsReturned);
 
+
+    },
+
+    /******************************************************************************************************************/
+    schoolsReturned: function (success, data) {
+        if (!success){
+            //data contains the error message
+            //console.log(data);
+
+            //tell the user about the error
+
+            myApp.alert('There was an error loading the list of schools from The Cloud.<br>Please make sure you are connected to the internet and click OK to try again.<br>' + data, 'Error Loading Schools!', function () {
+                awsConnector.fetchSchools(app.schoolsReturned);
+            });
+
+            return;
+        }
+
+        //save the schools locally so we can use them later
+        globals.cc_schools = data;
+
+        //show the confessions
+        mainView.router.loadPage({url: 'pages/confessions.html', animatePages: true});
 
     }
 

@@ -1,35 +1,84 @@
 
 myApp.onPageInit('schools', function (page) {
 
-    //Events to watch
+    var mySearchbar = myApp.searchbar('.searchbar', {
+        searchList: '.list-block-search',
+        searchIn: '.item-title, .item-subtitle'
+    });
 
 });
 
 myApp.onPageBeforeAnimation('schools', function(page) {
 
-    //check to see if we're loading this page because the user is trying to confess without having already selecting a school
+    schoolsPage.buildSchoolList();
 
-    if (page.query.choiceContext){
-        if (page.query.choiceContext === 'confessing'){
-            //the user is trying to confess
-            if (globals.userSchool === 'All'){
-                //and, they have not selected their school
-                $$('#schoolPageUserMessage').html('You need to choose your school before you can confess');
-                return;
-            }
-        }
+    if (globals.confessing){
+        $$('#addNew_BTN').show();
+        $$('#seeAll_BTN').hide();
+    }
+    else {
+        $$('#addNew_BTN').hide();
+        $$('#seeAll_BTN').show();
     }
 
-    //we're not choosing a school because the user is confessing without a school selected
-    //so, they are just picking a school for whatever reason
-    $$('#schoolPageUserMessage').html('Please select your school');
+});
 
+myApp.onPageAfterAnimation('schools', function(page) {
 
 });
 
 var schoolsPage = {
 
     //******************************************************************************************************************
+    buildSchoolList: function () {
+
+
+        schoolListHTML = '';
+
+        globals.cc_schools.forEach(function (school, index) {
+
+            schoolListHTML += '<li>\n' +
+                '                        <a href="#" class="item-link item-content" onclick="schoolsPage.pickSchool(&#39;' + school.itemID + '&#39;)">\n' +
+                '                            <div class="item-inner">\n' +
+                '                                <div class="item-title-row">\n' +
+                '                                    <div class="item-title">' + school.schoolName + '</div>\n' +
+                '                                </div>\n' +
+                '                                <div class="item-subtitle">' + school.schoolCity + ' ' + school.schoolState + ' ' + school.schoolZip + '</div>\n' +
+                '                            </div>\n' +
+                '                        </a>\n' +
+                '                    </li>'
+
+
+        });
+
+
+
+
+        $$('#schoolList').html(schoolListHTML);
+
+
+
+    },
+
+    //******************************************************************************************************************
+    pickSchool: function (schoolID) {
+
+        globals.setPersistentGlobal('userSchool', schoolID);
+
+        $$('#menu_UserSchool').html(globals.userSchool);
+
+        if (globals.confessing){
+
+        }
+        else {
+
+            //set the school filter to this school
+            globals.confessionSchoolFilter = schoolID;
+
+            //show the confessions
+            mainView.router.loadPage({url: 'pages/confessions.html', animatePages: true});
+        }
+    }
 
 
     //******************************************************************************************************************

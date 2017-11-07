@@ -54,18 +54,44 @@ var awsConnector = {
     },
 
     //******************************************************************************************************************
-    fetchConfessions: function (collegeID, callback) {
+    fetchConfessions: function (callback) {
 
         var params = {
-            TableName: 'cc_confessions',
-            KeyConditionExpression: 'collegeID = :collegeID ',
+            TableName: 'cc_confessions_schools',
+            KeyConditionExpression: 'itemType = :itemType ',
             ExpressionAttributeValues: {
-                ':collegeID': collegeID
+                ':itemType': 'confession'
             }
         };
 
         this.dynamodbEast.query(params, function(err, data) {
-            //console.log('fetchAppConfig ' + err);
+
+            if (err){
+                //console.log(err); // an error occurred
+                callback(false, err);
+
+            }
+            else {
+                // successful response
+                callback(true, data.Items);
+            }
+        });
+
+    },
+
+    //******************************************************************************************************************
+    fetchSchools: function ( callback) {
+
+        var params = {
+            TableName: 'cc_confessions_schools',
+            KeyConditionExpression: 'itemType = :itemType ',
+            ExpressionAttributeValues: {
+                ':itemType': 'school'
+            }
+        };
+
+        this.dynamodbEast.query(params, function(err, data) {
+
             if (err){
                 //console.log(err); // an error occurred
                 callback(false, err);

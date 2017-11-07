@@ -8,7 +8,7 @@ myApp.onPageInit('confess', function (page) {
 myApp.onPageBeforeAnimation('confess', function(page) {
 
     //test to see if a school has been set
-    if (globals.userSchool === 'All'){
+    if (globals.userSchool === '000'){
 
         mainView.router.loadPage({url: 'pages/schools.html', animatePages: true});
 

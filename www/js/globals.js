@@ -1,7 +1,7 @@
 
 var globals = {
 
-    version: 2.046,
+    version: 2.047,
 
     //localDev is programatically set to indicate we're running in a browser
     localDev: false,
@@ -9,7 +9,15 @@ var globals = {
     //holds various server based configuration values
     AppConfiguration: null,
 
+    //holds the list of schools read from the cloud
+    cc_schools: [],
 
+    //set to true while in a confessing workflow
+    confessing: false,
+
+    //holds the schoolID to filter the list of confessions to
+    //set to '000' to show all schools
+    confessionSchoolFilter: '000',
 
 
     // Persistent Globals
@@ -25,7 +33,7 @@ var globals = {
         if(!globals.userFirstName){globals.setPersistentGlobal('userFirstName', 'Anonymous')};
 
         globals.userSchool = $.jStorage.get('userSchool');
-        if(!globals.userSchool){globals.setPersistentGlobal('userSchool', 'All')};
+        if(!globals.userSchool){globals.setPersistentGlobal('userSchool', '000')};
 
     },
 
@@ -34,7 +42,7 @@ var globals = {
         //reset all the persistent globals out of persistent storage
 
         globals.setPersistentGlobal('userFirstName', 'Anonymous');
-        globals.setPersistentGlobal('userSchool', 'All');
+        globals.setPersistentGlobal('userSchool', '000');
 
     },
 

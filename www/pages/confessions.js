@@ -14,13 +14,13 @@ myApp.onPageInit('confessions', function (page) {
 
 myApp.onPageBeforeAnimation('confessions', function(page) {
 
-    confessionsPage.loadConfessions();
+    confessionsPage.loadConfessions(globals.userSchool);
+
+    globals.confessing = false;
 
 });
 
 myApp.onPageAfterAnimation('confessions', function(page) {
-
-
 
 
 });
@@ -30,6 +30,16 @@ var confessionsPage = {
 
     //******************************************************************************************************************
     loadConfessions: function () {
+
+        //set the button tab
+        if (globals.confessionSchoolFilter !== '000'){
+            $$('#showAllConfessionsBTN').removeClass('active');
+            $$('#showMySchoolConfessionsBTN').addClass('active');
+        }
+        else {
+            $$('#showAllConfessionsBTN').addClass('active');
+            $$('#showMySchoolConfessionsBTN').removeClass('active');
+        }
 
         var loadingHTML = '<li class="item-content">\n' +
             '                        <div class="item-inner">\n' +
@@ -42,19 +52,19 @@ var confessionsPage = {
 
         $$('#confessionList').html(loadingHTML);
 
-        awsConnector.fetchConfessions('001', confessionsPage.confessionsReturned)
+        awsConnector.fetchConfessions(confessionsPage.confessionsReturned)
 
     },
 
     //******************************************************************************************************************
     confessionsReturned: function (success, data) {
 
-        // When loading done, we need to reset pull to refresh UI
+        // When loading is done, we need to reset pull to refresh UI
         myApp.pullToRefreshDone();
 
         if (!success){
             //data contains the error message
-            console.log(data);
+            //console.log(data);
 
             //tell the user about the error
 
@@ -72,18 +82,7 @@ var confessionsPage = {
                 '           <a href="#" class="button" onclick="confessionsPage.loadConfessions()">Try Again</a>' +
                 '           <p></p>' +
                 '       </div>\n' +
-                '    </li>'
-
-/*            var errorHTML = '<li class="item-content">\n' +
-                '                        <div class="item-inner">\n' +
-                '                            <div class="item-title-row">\n' +
-                '                                <div class="item-title">Error Loading Confessions</div>\n' +
-                '                            </div>\n' +
-                '                        </div>\n' +
-                '                        <div class="item-inner">\n' +
-                '                            <a href="#" class="button">Try Again</a>\n' +
-                '                        </div>\n' +
-                '                    </li>';*/
+                '    </li>';
 
             $$('#confessionList').html(errorHTML);
 
@@ -91,7 +90,6 @@ var confessionsPage = {
         }
 
         //data contains the array of confessions
-        //console.log(data.length + ' confessions');
 
         //tell the user we are processing the confessions
         var processingConfessionsHTML = '<li class="item-content">\n' +
@@ -104,6 +102,19 @@ var confessionsPage = {
 
         $$('#confessionList').html(processingConfessionsHTML);
 
+
+        //filter the lsit of confessions if needed
+        if (globals.confessionSchoolFilter !== '000'){
+            //we need to filter
+
+            data = data.filter(function (school) {
+                return school.schoolID === globals.confessionSchoolFilter;
+            });
+
+        }
+
+
+        //TODO sort the confessions by createTime
 
         var confessionListHTML = '';
 
@@ -132,11 +143,41 @@ var confessionsPage = {
     },
 
     //******************************************************************************************************************
+    showAllConfessions: function () {
+
+        globals.confessionSchoolFilter = '000';
+
+        $$('#showAllConfessionsBTN').addClass('active');
+        $$('#showMySchoolConfessionsBTN').removeClass('active');
+
+        confessionsPage.loadConfessions();
+
+    },
+
+    //******************************************************************************************************************
+    showMySchoolConfessions: function () {
+
+        //TODO need to see if the user has selected a school
+        //if not, force them to select a school first
+
+        globals.confessionSchoolFilter = globals.userSchool;
+
+        $$('#showAllConfessionsBTN').removeClass('active');
+        $$('#showMySchoolConfessionsBTN').addClass('active');
+
+        confessionsPage.loadConfessions();
+
+    },
+
+    //******************************************************************************************************************
     confess: function () {
+
+        globals.confessing = true;
+
         //test to see if a school has been set
         if (globals.userSchool === 'All'){
 
-            mainView.router.loadPage({url: 'pages/schools.html?choiceContext=confessing', animatePages: true});
+            mainView.router.loadPage({url: 'pages/schools.html', animatePages: true});
 
         }
         else {

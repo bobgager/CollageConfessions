@@ -14,12 +14,6 @@
             </a>
         </div>
 
-<!--        &lt;!&ndash; Sub navbar &ndash;&gt;
-        <div class="subnavbar">
-            <div class="text-center subnavbarInstructions" >
-                Please Select A Location
-            </div>
-        </div>-->
 
     </div>
 </div>
@@ -46,7 +40,16 @@
             </div>
 
 
-            <div class="list-block " style="margin: 10px">
+            <div class="list-block " style="margin: 20px">
+
+                <div class="center-wrapper">
+                    <div class="centered-div width-100p ">
+                        <p class="buttons-row mt-0">
+                            <a id="showAllConfessionsBTN" href="#" class="button active" onclick="confessionsPage.showAllConfessions()">All</a>
+                            <a id="showMySchoolConfessionsBTN" href="#" class="button" onclick="confessionsPage.showMySchoolConfessions()">My School</a>
+                        </p>
+                    </div>
+                </div>
 
                 <ul id="confessionList" >
                     <!--generated confessions will get inserted here-->

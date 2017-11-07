@@ -17,15 +17,60 @@
 <div class="pages">
     <div class="page navbar-fixed   " data-page="schools">
 
+        <div class="toolbar ">
+            <div class="toolbar-inner " >
+                <a href="#" class="link" ></a>
+                <a id="seeAll_BTN" href="#" class="link " onclick="confessionsPage.newSchool()">See All Schools</a>
+                <a id="addNew_BTN" href="#" class="link " onclick="confessionsPage.newSchool()">Add New School</a>
+                <a href="#" class="link"></a>
+            </div>
+        </div>
+
+
+
+        <!-- Search Bar -->
+        <form class="searchbar">
+            <div class="searchbar-input">
+                <input type="search" placeholder="Search by Name, City, State, or Zip">
+                <a href="#" class="searchbar-clear"></a>
+            </div>
+            <a href="#" class="searchbar-cancel">Cancel</a>
+        </form>
+
+        <!-- Search Bar overlay-->
+        <div class="searchbar-overlay"></div>
+
 
         <div class="page-content">
 
-            <p id="schoolPageUserMessage" class="well" style="color: white; text-align: center">Please select your school</p>
+
+            <div class="page-bg-school-church" ></div>
+
+
+            <div class="content-block searchbar-not-found mt-20">
+                <div>
+                    <p class="well" style="color: white; text-align: center">We can't find that school.<br>Please add it below.</p>
+                </div>
+            </div>
+
+            <div class="list-block list-block-search searchbar-found media-list inset opacity-9 mt-10">
+                <ul id="schoolList">
+
+                    <li>
+                        <i class="fa fa-spin fa-spinner"></i>&nbsp;&nbsp;Loading Schools
+                    </li>
+
+                </ul>
+            </div>
+
+
 
         </div>
 
 
-        <div class="page-bg-creepypriest" ></div>
+
+
+
 
     </div>
 </div>
