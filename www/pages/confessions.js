@@ -14,7 +14,7 @@ myApp.onPageInit('confessions', function (page) {
 
 myApp.onPageBeforeAnimation('confessions', function(page) {
 
-    confessionsPage.loadConfessions(globals.userSchool);
+    confessionsPage.loadConfessions(globals.userSchool.itemID);
 
     globals.confessing = false;
 
@@ -103,7 +103,7 @@ var confessionsPage = {
         $$('#confessionList').html(processingConfessionsHTML);
 
 
-        //filter the lsit of confessions if needed
+        //filter the list of confessions if needed
         if (globals.confessionSchoolFilter !== '000'){
             //we need to filter
 
@@ -114,7 +114,17 @@ var confessionsPage = {
         }
 
 
-        //TODO sort the confessions by createTime
+        //sort descending by the create time
+        data.sort(function(a, b){
+            var createTimeA=a.createTime, createTimeB=b.createTime
+            if (createTimeA > createTimeB) //sort  descending
+                return -1
+            if (createTimeA < createTimeB)
+                return 1
+            return 0 //default return value (no sorting)
+        });
+
+
 
         var confessionListHTML = '';
 
@@ -129,14 +139,26 @@ var confessionsPage = {
     //******************************************************************************************************************
     confessionItemHTML: function (confession) {
 
+        var selectedSchoolArray = globals.cc_schools.filter(function (school) {
+            return school.itemID === confession.schoolID;
+        });
 
-        var confessionItemHTML = '<li class="item-content">\n' +
-            '                        <div class="item-inner">\n' +
-            '                            <div class="item-title-row">\n' +
-            '                                <div class="item-title">' + confession.confession + '</div>\n' +
-            '                            </div>\n' +
-            '                        </div>\n' +
-            '                    </li>';
+        confessionItemHTML = '' +
+            '<li class="card facebook-card  " style="background-color: rgba(0,0,0,0.75)">\n' +
+            '  <div class="card-header " >\n' +
+            '    <div class="facebook-avatar"><img src="img/anonymous.png" width="34" height="34"></div>\n' +
+            '    <div class="facebook-name">Anonymous @ ' + selectedSchoolArray[0].schoolName + '</div>\n' +
+            '    <div class="facebook-date">' + confession.createTime + '</div>\n' +
+            '  </div>\n' +
+            '  <div class="card-content ">\n' +
+            '       <div>' + confession.confession + '</div>\n' +
+            '   </div>\n' +
+            '  <div class="card-footer">\n' +
+            '    <a href="#" class="link">Forgive</a>\n' +
+            '    <a href="#" class="link">Condem</a>\n' +
+            '    <a href="#" class="link">BS</a>\n' +
+            '  </div>\n' +
+            '</li>';
 
         return confessionItemHTML;
 
@@ -157,10 +179,14 @@ var confessionsPage = {
     //******************************************************************************************************************
     showMySchoolConfessions: function () {
 
-        //TODO need to see if the user has selected a school
+        //see if the user has selected a school
         //if not, force them to select a school first
+        if(globals.userSchool === '000'){
+            mainView.router.loadPage({url: 'pages/schools.html', animatePages: true});
+            return;
+        }
 
-        globals.confessionSchoolFilter = globals.userSchool;
+        globals.confessionSchoolFilter = globals.userSchool.itemID;
 
         $$('#showAllConfessionsBTN').removeClass('active');
         $$('#showMySchoolConfessionsBTN').addClass('active');
@@ -175,7 +201,7 @@ var confessionsPage = {
         globals.confessing = true;
 
         //test to see if a school has been set
-        if (globals.userSchool === 'All'){
+        if (globals.userSchool === '000'){
 
             mainView.router.loadPage({url: 'pages/schools.html', animatePages: true});
 

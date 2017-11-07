@@ -105,6 +105,43 @@ Usage example
     width: 100%;
 }
 
+.facebook-card  {
+    border: solid;
+    border-width: 1px;
+    border-color: rgba(0, 122, 255, 0.5);
+}
+
+.facebook-card .card-header {
+    display: block;
+    padding: 10px;
+}
+.facebook-card .facebook-avatar {
+    float: left;
+}
+.facebook-card .facebook-name {
+    margin-left: 44px;
+    font-size: 14px;
+    font-weight: 500;
+}
+.facebook-card .facebook-date {
+    margin-left: 44px;
+    font-size: 13px;
+    color: #8e8e93;
+}
+/*.facebook-card .card-footer {
+    background: #fafafa;
+}
+.facebook-card .card-footer a {
+    color: #81848b;
+    font-weight: 500;
+}*/
+.facebook-card .card-content {
+    padding: 10px;
+}
+.facebook-card .card-content-inner {
+    padding: 15px 10px;
+}
+
 .well {
     background-color: rgba(0, 0, 0, 0.8);
     margin-left: 30px;

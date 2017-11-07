@@ -20,7 +20,7 @@ var developerPage = {
         myApp.showPreloader('Clearing...')
         setTimeout(function () {
             myApp.hidePreloader();
-        }, 2000);
+        }, 1000);
     }
 
     //******************************************************************************************************************

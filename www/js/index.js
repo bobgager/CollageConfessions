@@ -72,20 +72,6 @@ var app = {
         console.log('DeviceReady has fired');
 
 
-
-        if (!globals.localDev){
-            myApp.showPreloader('Setting Title Bar Color')
-            setTimeout(function () {
-                myApp.hidePreloader();
-            }, 2000);
-            //set the color of the iOS Status Bar
-            //StatusBar.backgroundColorByHexString('#000000');
-            //using Framework7
-            //$('.statusbar-overlay' ).css( "background", globals.theLocationsArray[locationIndex].NavBarBackgroundColor );
-            //but, since it's always black, jsut do it with CSS in custom_app.css
-        }
-
-
         //track the launch event
         //get the device info
 /*        if(!globals.localDev){
@@ -181,7 +167,7 @@ var app = {
            $$('#menu_UserSchool').html('Not Selected');
        }
        else {
-           $$('#menu_UserSchool').html(globals.userSchool);
+           $$('#menu_UserSchool').html(globals.userSchool.schoolName);
        }
 
 

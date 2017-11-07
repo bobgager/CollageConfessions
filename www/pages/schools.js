@@ -63,9 +63,13 @@ var schoolsPage = {
     //******************************************************************************************************************
     pickSchool: function (schoolID) {
 
-        globals.setPersistentGlobal('userSchool', schoolID);
+        var selectedSchoolArray = globals.cc_schools.filter(function (school) {
+            return school.itemID === schoolID;
+        });
 
-        $$('#menu_UserSchool').html(globals.userSchool);
+        globals.setPersistentGlobal('userSchool', selectedSchoolArray[0]);
+
+        $$('#menu_UserSchool').html(globals.userSchool.schoolName);
 
         if (globals.confessing){
 
