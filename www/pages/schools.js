@@ -71,13 +71,14 @@ var schoolsPage = {
 
         $$('#menu_UserSchool').html(globals.userSchool.schoolName);
 
-        if (globals.confessing){
+        //set the school filter to this school
+        globals.confessionSchoolFilter = schoolID;
 
+        if (globals.confessing){
+            //show the confession page
+            mainView.router.loadPage({url: 'pages/confess.html', animatePages: true});
         }
         else {
-
-            //set the school filter to this school
-            globals.confessionSchoolFilter = schoolID;
 
             //show the confessions
             mainView.router.loadPage({url: 'pages/confessions.html', animatePages: true});

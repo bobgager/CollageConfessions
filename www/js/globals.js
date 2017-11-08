@@ -1,7 +1,7 @@
 
 var globals = {
 
-    version: 2.048,
+    version: 2.049,
 
     //localDev is programatically set to indicate we're running in a browser
     localDev: false,

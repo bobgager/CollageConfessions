@@ -85,8 +85,22 @@ Usage example
     margin-top: 20px;
 }
 
+.mb-0 {
+    margin-bottom: 0px;
+}
+
 .mb-10 {
     margin-bottom: 10px;
+}
+
+.margin-r-l-0 {
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+.margin-r-l-20 {
+    margin-right: 20px;
+    margin-left: 20px;
 }
 
 .mb-20 {
@@ -105,10 +119,10 @@ Usage example
     width: 100%;
 }
 
-.facebook-card  {
+.blue-border  {
     border: solid;
     border-width: 1px;
-    border-color: rgba(0, 122, 255, 0.5);
+    border-color: rgba(0, 122, 255, 0.4);
 }
 
 .facebook-card .card-header {
@@ -136,7 +150,7 @@ Usage example
     font-weight: 500;
 }*/
 .facebook-card .card-content {
-    padding: 10px;
+    padding: 20px;
 }
 .facebook-card .card-content-inner {
     padding: 15px 10px;

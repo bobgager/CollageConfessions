@@ -17,15 +17,64 @@
 <div class="pages">
     <div class="page navbar-fixed   " data-page="confess">
 
+        <div class="toolbar ">
+            <div class="toolbar-inner " >
+                <a href="#" class="link" ></a>
+                <a href="#" class="link " onclick="confessPage.postConfession()">POST CONFESSION</a>
+                <a href="#" class="link"></a>
+            </div>
+        </div>
+
+        <div class="page-bg-creepypriest" ></div>
+
 
         <div class="page-content">
 
-            <p class="well" style="color: white">The Lord be in your heart and upon your lips that you may truly and humbly confess your sins: In the Name of the Father, and of the Son, and of the Holy Spirit.  Amen.</p>
+            <p class="well" style="color: white; font-size: small; ">The Lord be in your heart and upon your lips that you may truly and humbly confess your sins: In the Name of the Father, and of the Son, and of the Holy Spirit.  Amen.</p>
+
+
+            <div class="card facebook-card blue-border" style="background-color: rgba(0,0,0,0.60)">
+                <div class="card-header no-border">
+                    <div class="facebook-avatar"><img src="img/anonymous.png" width="34" height="34"></div>
+                    <div class="facebook-name">Anonymous</div>
+                    <div id="confessionSchoolName" class="facebook-date">school here</div>
+                </div>
+                <div class="card-content">
+
+
+                    <div class="list-block" >
+                        <ul style="background-color: rgba(0,0,0,0.60)">
+                            <!-- Additional "align-top" class for correct textarea alignment -->
+                            <li class="align-top" >
+                                <div class="item-content" >
+                                    <div class="item-inner" >
+                                        <div class="item-input " >
+                                            <textarea id="confessionInput"  style="font-size: 14px; " onfocus="if (this.value=='Enter your confession here') this.value = ''" onblur="if (this.value=='') this.value = 'Enter your confession here'">Enter your confession here</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                </div>
+                <div class="card-footer no-border">
+                    <a href="#" class="link"></a>
+                    <a href="#" class="link" onclick="confessPage.postConfession()">Post Confession</a>
+                    <a href="#" class="link"></a>
+                </div>
+            </div>
+
 
         </div>
 
 
-        <div class="page-bg-creepypriest" ></div>
+
+
+
+
+
 
     </div>
 </div>

@@ -103,6 +103,36 @@ var awsConnector = {
             }
         });
 
+    },
+
+    //!******************************************************************************************************************
+    postConfession: function(confession, callback){
+
+        var now = new Date();
+
+        var params = {
+            TableName: 'cc_confessions_schools',
+            Key: { itemType : 'confession', itemID: confession.itemID },
+            UpdateExpression: "set createTime = :ct, confession=:confession, schoolID=:schoolID ",
+            ExpressionAttributeValues:{
+                ":ct": now.getTime(),
+                ":confession": confession.confession,
+                ":schoolID": confession.schoolID
+            }
+        };
+
+        this.dynamodbEast.update(params, function(err, data) {
+
+            if (err){
+                //console.log(err); // an error occurred
+                callback (false, err);
+            }
+            else {
+                //console.log(data);
+                callback(true);
+            }
+        });
+
     }
 
 

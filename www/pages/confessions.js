@@ -144,19 +144,19 @@ var confessionsPage = {
         });
 
         confessionItemHTML = '' +
-            '<li class="card facebook-card  " style="background-color: rgba(0,0,0,0.75)">\n' +
+            '<li class="card facebook-card blue-border margin-r-l-0 " style="background-color: rgba(153,153,153,0.2)">\n' +
             '  <div class="card-header " >\n' +
             '    <div class="facebook-avatar"><img src="img/anonymous.png" width="34" height="34"></div>\n' +
-            '    <div class="facebook-name">Anonymous @ ' + selectedSchoolArray[0].schoolName + '</div>\n' +
-            '    <div class="facebook-date">' + confession.createTime + '</div>\n' +
+            '    <div class="facebook-name row">Anonymous<span class="facebook-date">' + cobaltfireUtils.daysAgo(confession.createTime) + '</span></div>\n' +
+            '    <div class="facebook-date">' + selectedSchoolArray[0].schoolName + '</div>\n' +
             '  </div>\n' +
             '  <div class="card-content ">\n' +
             '       <div>' + confession.confession + '</div>\n' +
             '   </div>\n' +
             '  <div class="card-footer">\n' +
-            '    <a href="#" class="link">Forgive</a>\n' +
-            '    <a href="#" class="link">Condem</a>\n' +
-            '    <a href="#" class="link">BS</a>\n' +
+            '    <a href="#" class="link"><i class="fa fa-heart-o"></i>&nbsp;&nbsp;Forgive</a>\n' +
+            '    <a href="#" class="link"><i class="fa fa-thumbs-o-down"></i>&nbsp;&nbsp;Condem</a>\n' +
+            '    <a href="#" class="link"><i class="fa fa-hand-stop-o"></i>&nbsp;&nbsp;Bull Shit</a>\n' +
             '  </div>\n' +
             '</li>';
 
