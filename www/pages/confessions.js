@@ -91,6 +91,8 @@ var confessionsPage = {
 
         //data contains the array of confessions
 
+
+
         //tell the user we are processing the confessions
         var processingConfessionsHTML = '<li class="item-content">\n' +
             '                        <div class="item-inner">\n' +
@@ -111,6 +113,23 @@ var confessionsPage = {
                 return school.schoolID === globals.confessionSchoolFilter;
             });
 
+        }
+
+        if (data.length === 0){
+            //tell the user there a no confessions
+            var noConfessionsHTML = '' +
+                '                    <li>' +
+                '                       <!-- Inset content block -->\n' +
+                '                       <div class="content-block inset">\n' +
+                '                           <div class="content-block-inner">\n' +
+                '                               <p>Sorry, there are no confessions posted for your school.<br><br>Tap the CONFESS button below to be the first to confess.</p>\n' +
+                '                           </div>\n' +
+                '                       </div>' +
+                '                    </li>';
+
+            $$('#confessionList').html(noConfessionsHTML);
+
+            return;
         }
 
 
@@ -144,23 +163,56 @@ var confessionsPage = {
         });
 
         confessionItemHTML = '' +
-            '<li class="card facebook-card blue-border margin-r-l-0 " style="background-color: rgba(153,153,153,0.2)">\n' +
-            '  <div class="card-header " >\n' +
+            '<li class="card facebook-card black-border margin-r-l-0 " style="background-color: rgba(153,153,153,0.3)">\n' +
+            '  <div class="card-header ' + confessionsPage.headerClass(confession, false) + ' " >\n' +
             '    <div class="facebook-avatar"><img src="img/anonymous.png" width="34" height="34"></div>\n' +
             '    <div class="facebook-name row">Anonymous<span class="facebook-date">' + cobaltfireUtils.daysAgo(confession.createTime) + '</span></div>\n' +
             '    <div class="facebook-date">' + selectedSchoolArray[0].schoolName + '</div>\n' +
             '  </div>\n' +
+            confessionsPage.headerClass(confession, true) +
             '  <div class="card-content ">\n' +
             '       <div>' + confession.confession + '</div>\n' +
             '   </div>\n' +
-            '  <div class="card-footer">\n' +
-            '    <a href="#" class="link"><i class="fa fa-heart-o"></i>&nbsp;&nbsp;Forgive</a>\n' +
-            '    <a href="#" class="link"><i class="fa fa-thumbs-o-down"></i>&nbsp;&nbsp;Condem</a>\n' +
-            '    <a href="#" class="link"><i class="fa fa-hand-stop-o"></i>&nbsp;&nbsp;Bull Shit</a>\n' +
+            '  <div class="card-footer ">\n' +
+            '    <a href="#" class="link forgive-color" onclick="confessionsPage.incrementCount(&#39;forgiveCount&#39;,&#39;' + confession.itemID + '&#39;,' + confession.forgiveCount + ')"><i class="fa fa-heart-o"></i>&nbsp;&nbsp;Forgive<span       id="forgiveCount' + confession.itemID + '" class="forgive-count">' + confession.forgiveCount + '</span></a>\n' +
+            '    <a href="#" class="link condem-color"  onclick="confessionsPage.incrementCount(&#39;condemCount&#39;,&#39;'  + confession.itemID + '&#39;,' + confession.condemCount + ')"> <i class="fa fa-thumbs-o-down"></i>&nbsp;&nbsp;Condem<span  id="condemCount'  + confession.itemID + '" class="condem-count">'  + confession.condemCount + '</span></a>\n' +
+            '    <a href="#" class="link bs-color"      onclick="confessionsPage.incrementCount(&#39;bsCount&#39;,&#39;'      + confession.itemID + '&#39;,' + confession.bsCount + ')">     <i class="fa fa-hand-stop-o"></i>&nbsp;&nbsp;Bull Shit<span id="bsCount'      + confession.itemID + '" class="bs-count">'      + confession.bsCount + '</span></a>\n' +
             '  </div>\n' +
             '</li>';
 
         return confessionItemHTML;
+
+    },
+
+    //******************************************************************************************************************
+    headerClass: function (confession, arrow) {
+
+        var countArray = [  {countHeader: 'forgive-header', headerTriangle: 'forgive-triangle', count: confession.forgiveCount},
+                            {countHeader: 'condem-header',  headerTriangle: 'condem-triangle', count: confession.condemCount},
+                            {countHeader: 'bs-header',      headerTriangle: 'bs-triangle', count: confession.bsCount}     ];
+
+
+        countArray.sort(function(a, b){
+            var countA=a.count, countB=b.count
+            if (countA < countB) //sort  descending
+                return 1
+            if (countA > countB)
+                return -1
+            return 0 //default return value (no sorting)
+        });
+
+
+        //see if the two top counts are equal
+        if (countArray[0].count === countArray[1].count){
+            //if they are, return an empty string
+            return '';
+        }
+
+        if (arrow){
+            return '  <div class="' + countArray[0].headerTriangle + '" ></div>\n';
+        }
+
+        return countArray[0].countHeader;
 
     },
 
@@ -209,6 +261,41 @@ var confessionsPage = {
         else {
             mainView.router.loadPage({url: 'pages/confess.html', animatePages: true});
         }
+    },
+
+    //******************************************************************************************************************
+    incrementCount: function (countName, itemID, currentCount) {
+
+        //TODO put in a mechanism to make sure this user can't vote on a single confession more than once in a session
+
+        awsConnector.updateConfessionCount(countName, itemID, currentCount, confessionsPage.countUpdated);
+
+
+    },
+
+    //******************************************************************************************************************
+    countUpdated:function (elementID, success, data) {
+
+        if (!success){
+            //the count update failed to post
+            myApp.modal({
+                title:  'DOH!',
+                text: 'There was an error communicating with The Cloud.<br><br>Please check that you are connected to the internet and try again.<br><br>(Error Code: cu_001)<br>' + data,
+            });
+
+            return ;
+
+        }
+
+        //update successful
+
+        //for now, just reload the confessions
+        //confessionsPage.loadConfessions();
+
+        //increment the current count in the element locally
+        var currentCount = Number($$('#' + elementID).html()) ;
+        $$('#' + elementID).html(currentCount + 1);
+
     }
 
 

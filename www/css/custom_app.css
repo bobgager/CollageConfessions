@@ -119,10 +119,133 @@ Usage example
     width: 100%;
 }
 
+.black-border  {
+     border: solid;
+     border-width: 1px;
+     border-color: rgba(0, 0, 0, 1.0);
+ }
+
 .blue-border  {
     border: solid;
     border-width: 1px;
     border-color: rgba(0, 122, 255, 0.4);
+}
+
+.condem-color {
+    color: rgba(255, 69, 0, 1);
+}
+
+.condem-count {
+    font-size: 13px;
+    display: inline-block;
+    color: rgba(255, 69, 0, 1);
+    background: rgba(0, 0, 0, 0);
+    border-radius: 20px;
+    border:1px solid;
+    border-color: rgba(255, 69, 0, 1);
+    padding: 0px 6px;
+    height: 20px;
+    line-height: 20px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.condem-triangle {
+    width: 0;
+    height: 0;
+    margin-top: -1px;
+    margin-left: 12px;
+    z-index: 1000;
+    position: relative;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+
+    border-top: 15px solid rgba(255, 69, 0, 0.5);
+}
+
+.condem-header  {
+    /*    border: solid;
+        border-width: 1px;
+        border-color: rgba(0, 122, 255, 1);*/
+    background: rgba(255, 69, 0, 0.5);
+}
+
+.forgive-color {
+    color: rgba(0, 122, 255, 1.0);
+}
+
+.forgive-count {
+    font-size: 13px;
+    display: inline-block;
+    color: rgba(0, 122, 255, 1.0);
+    background: rgba(0, 0, 0, 0);
+    border-radius: 20px;
+    border:1px solid;
+    border-color: rgba(0, 122, 255, 1.0);
+    padding: 0px 6px;
+    height: 20px;
+    line-height: 20px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.forgive-triangle {
+     width: 0;
+     height: 0;
+     margin-top: -1px;
+     margin-left: 12px;
+     z-index: 1000;
+     position: relative;
+     border-left: 15px solid transparent;
+     border-right: 15px solid transparent;
+
+     border-top: 15px solid rgba(0, 122, 255, 0.5);
+ }
+
+.forgive-header  {
+/*    border: solid;
+    border-width: 1px;
+    border-color: rgba(0, 122, 255, 1);*/
+    background: rgba(0, 122, 255, 0.5);
+ }
+
+.bs-color {
+    color: rgba(244, 164, 96, 1.0);
+}
+
+.bs-count {
+    font-size: 13px;
+    display: inline-block;
+    color: rgba(244, 164, 96, 1.0);
+    background: rgba(0, 0, 0, 0);
+    border-radius: 20px;
+    border:1px solid;
+    border-color: rgba(244, 164, 96, 1.0);
+    padding: 0px 6px;
+    height: 20px;
+    line-height: 20px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.bs-triangle {
+    width: 0;
+    height: 0;
+    margin-top: -1px;
+    margin-left: 12px;
+    z-index: 1000;
+    position: relative;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+
+    border-top: 15px solid rgba(244, 164, 96, 0.5);
+}
+
+.bs-header  {
+    /*    border: solid;
+        border-width: 1px;
+        border-color: rgba(0, 122, 255, 1);*/
+    background: rgba(244, 164, 96, 0.5);
 }
 
 .facebook-card .card-header {
@@ -140,7 +263,7 @@ Usage example
 .facebook-card .facebook-date {
     margin-left: 44px;
     font-size: 13px;
-    color: #8e8e93;
+    color: #c0c0c5;
 }
 /*.facebook-card .card-footer {
     background: #fafafa;
@@ -151,6 +274,7 @@ Usage example
 }*/
 .facebook-card .card-content {
     padding: 20px;
+    padding-top: 5px;
 }
 .facebook-card .card-content-inner {
     padding: 15px 10px;

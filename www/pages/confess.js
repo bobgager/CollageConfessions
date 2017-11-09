@@ -29,6 +29,9 @@ var confessPage = {
         newConfession.itemID = cobaltfireUtils.guid();
         newConfession.confession = $$('#confessionInput').val();
         newConfession.schoolID = globals.userSchool.itemID;
+        newConfession.forgiveCount = 0;
+        newConfession.condemCount = 0;
+        newConfession.bsCount = 0;
 
         awsConnector.postConfession(newConfession, confessPage.confessionPosted);
 

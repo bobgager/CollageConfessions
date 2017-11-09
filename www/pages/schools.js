@@ -12,15 +12,6 @@ myApp.onPageBeforeAnimation('schools', function(page) {
 
     schoolsPage.buildSchoolList();
 
-    if (globals.confessing){
-        $$('#addNew_BTN').show();
-        $$('#seeAll_BTN').hide();
-    }
-    else {
-        $$('#addNew_BTN').hide();
-        $$('#seeAll_BTN').show();
-    }
-
 });
 
 myApp.onPageAfterAnimation('schools', function(page) {
@@ -83,6 +74,11 @@ var schoolsPage = {
             //show the confessions
             mainView.router.loadPage({url: 'pages/confessions.html', animatePages: true});
         }
+    },
+
+    //******************************************************************************************************************
+    newSchool: function () {
+        mainView.router.loadPage({url: 'pages/new_school.html', animatePages: true});
     }
 
 
