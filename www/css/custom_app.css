@@ -131,6 +131,19 @@ Usage example
     border-color: rgba(0, 122, 255, 0.4);
 }
 
+.normal-triangle {
+    width: 0;
+    height: 0;
+    margin-top: -1px;
+    margin-left: 12px;
+    z-index: 1000;
+    position: relative;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+
+    border-top: 15px solid rgba(0, 0, 0, 0.5);
+}
+
 .condem-color {
     color: rgba(255, 69, 0, 1);
 }
@@ -160,14 +173,11 @@ Usage example
     border-left: 15px solid transparent;
     border-right: 15px solid transparent;
 
-    border-top: 15px solid rgba(255, 69, 0, 0.5);
+    border-top: 15px solid rgba(139, 63, 34, 1);
 }
 
 .condem-header  {
-    /*    border: solid;
-        border-width: 1px;
-        border-color: rgba(0, 122, 255, 1);*/
-    background: rgba(255, 69, 0, 0.5);
+    background: rgba(255, 69, 0, 0.5) !important;
 }
 
 .forgive-color {
@@ -199,14 +209,14 @@ Usage example
      border-left: 15px solid transparent;
      border-right: 15px solid transparent;
 
-     border-top: 15px solid rgba(0, 122, 255, 0.5);
+     border-top: 15px solid rgba(42, 83, 145, 1);
  }
 
 .forgive-header  {
 /*    border: solid;
     border-width: 1px;
     border-color: rgba(0, 122, 255, 1);*/
-    background: rgba(0, 122, 255, 0.5);
+    background: rgba(0, 122, 255, 0.5) !important;
  }
 
 .bs-color {
@@ -238,19 +248,19 @@ Usage example
     border-left: 15px solid transparent;
     border-right: 15px solid transparent;
 
-    border-top: 15px solid rgba(244, 164, 96, 0.5);
+    border-top: 15px solid rgba(139, 106, 76, 1);
 }
 
 .bs-header  {
-    /*    border: solid;
-        border-width: 1px;
-        border-color: rgba(0, 122, 255, 1);*/
-    background: rgba(244, 164, 96, 0.5);
+    background: rgba(244, 164, 96, 0.5) !important;
 }
 
 .facebook-card .card-header {
     display: block;
     padding: 10px;
+    padding-top: 2px;
+    padding-bottom: 0px;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 .facebook-card .facebook-avatar {
     float: left;
@@ -275,6 +285,7 @@ Usage example
 .facebook-card .card-content {
     padding: 20px;
     padding-top: 5px;
+    padding-bottom: 0px;
 }
 .facebook-card .card-content-inner {
     padding: 15px 10px;

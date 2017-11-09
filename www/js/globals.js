@@ -1,7 +1,7 @@
 
 var globals = {
 
-    version: 2.050,
+    version: 2.051,
 
     //localDev is programatically set to indicate we're running in a browser
     localDev: false,
@@ -11,6 +11,9 @@ var globals = {
 
     //holds the list of schools read from the cloud
     cc_schools: [],
+
+    //holds the confessions returned from the cloud
+    confessions: [],
 
     //set to true while in a confessing workflow
     confessing: false,

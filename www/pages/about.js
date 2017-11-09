@@ -3,6 +3,7 @@ myApp.onPageInit('about', function (page) {
 
     //Events to watch
     $$(document).on('click', '#openCFS_BTN', aboutPage.openCFS);
+    $$(document).on('click', '#openFacebook_BTN', aboutPage.openFacebook);
 
 });
 
@@ -24,6 +25,16 @@ var aboutPage = {
             return;
         }
         var ref = cordova.InAppBrowser.open('http://cobaltfire.com', '_system');
+    },
+
+    //******************************************************************************************************************
+    openFacebook: function () {
+
+        if (!myApp.device.os){
+            window.open('https://www.facebook.com/collegeconfessionsapp/', '_blank');
+            return;
+        }
+        var ref = cordova.InAppBrowser.open('https://www.facebook.com/collegeconfessionsapp/', '_system');
     }
 
     //******************************************************************************************************************

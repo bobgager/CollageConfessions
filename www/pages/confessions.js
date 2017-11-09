@@ -116,7 +116,7 @@ var confessionsPage = {
         }
 
         if (data.length === 0){
-            //tell the user there a no confessions
+            //tell the user there are no confessions
             var noConfessionsHTML = '' +
                 '                    <li>' +
                 '                       <!-- Inset content block -->\n' +
@@ -143,7 +143,8 @@ var confessionsPage = {
             return 0 //default return value (no sorting)
         });
 
-
+        //store the confessions so we can use them in other functions
+        globals.confessions = data;
 
         var confessionListHTML = '';
 
@@ -163,7 +164,7 @@ var confessionsPage = {
         });
 
         confessionItemHTML = '' +
-            '<li class="card facebook-card black-border margin-r-l-0 " style="background-color: rgba(153,153,153,0.3)">\n' +
+            '<li id="confession' + confession.itemID + '" class="card facebook-card black-border margin-r-l-0 " style="background-color: rgba(153,153,153,0.3)">\n' +
             '  <div class="card-header ' + confessionsPage.headerClass(confession, false) + ' " >\n' +
             '    <div class="facebook-avatar"><img src="img/anonymous.png" width="34" height="34"></div>\n' +
             '    <div class="facebook-name row">Anonymous<span class="facebook-date">' + cobaltfireUtils.daysAgo(confession.createTime) + '</span></div>\n' +
@@ -174,9 +175,9 @@ var confessionsPage = {
             '       <div>' + confession.confession + '</div>\n' +
             '   </div>\n' +
             '  <div class="card-footer ">\n' +
-            '    <a href="#" class="link forgive-color" onclick="confessionsPage.incrementCount(&#39;forgiveCount&#39;,&#39;' + confession.itemID + '&#39;,' + confession.forgiveCount + ')"><i class="fa fa-heart-o"></i>&nbsp;&nbsp;Forgive<span       id="forgiveCount' + confession.itemID + '" class="forgive-count">' + confession.forgiveCount + '</span></a>\n' +
-            '    <a href="#" class="link condem-color"  onclick="confessionsPage.incrementCount(&#39;condemCount&#39;,&#39;'  + confession.itemID + '&#39;,' + confession.condemCount + ')"> <i class="fa fa-thumbs-o-down"></i>&nbsp;&nbsp;Condem<span  id="condemCount'  + confession.itemID + '" class="condem-count">'  + confession.condemCount + '</span></a>\n' +
-            '    <a href="#" class="link bs-color"      onclick="confessionsPage.incrementCount(&#39;bsCount&#39;,&#39;'      + confession.itemID + '&#39;,' + confession.bsCount + ')">     <i class="fa fa-hand-stop-o"></i>&nbsp;&nbsp;Bull Shit<span id="bsCount'      + confession.itemID + '" class="bs-count">'      + confession.bsCount + '</span></a>\n' +
+            '    <a href="#" class="link forgive-color" onclick="confessionsPage.incrementCount(&#39;forgiveCount&#39;,&#39;' + confession.itemID + '&#39;,' + confession.forgiveCount + ')"><i class="fa fa-heart-o"></i>&nbsp;&nbsp;Forgive<span       class="forgive-count">' + confession.forgiveCount + '</span></a>\n' +
+            '    <a href="#" class="link condem-color"  onclick="confessionsPage.incrementCount(&#39;condemCount&#39;,&#39;'  + confession.itemID + '&#39;,' + confession.condemCount + ')"> <i class="fa fa-thumbs-o-down"></i>&nbsp;&nbsp;Condem<span  class="condem-count">'  + confession.condemCount + '</span></a>\n' +
+            '    <a href="#" class="link bs-color"      onclick="confessionsPage.incrementCount(&#39;bsCount&#39;,&#39;'      + confession.itemID + '&#39;,' + confession.bsCount + ')">     <i class="fa fa-hand-stop-o"></i>&nbsp;&nbsp;Bull Shit<span class="bs-count">'      + confession.bsCount + '</span></a>\n' +
             '  </div>\n' +
             '</li>';
 
@@ -185,7 +186,7 @@ var confessionsPage = {
     },
 
     //******************************************************************************************************************
-    headerClass: function (confession, arrow) {
+    headerClass: function (confession, triangle) {
 
         var countArray = [  {countHeader: 'forgive-header', headerTriangle: 'forgive-triangle', count: confession.forgiveCount},
                             {countHeader: 'condem-header',  headerTriangle: 'condem-triangle', count: confession.condemCount},
@@ -202,15 +203,24 @@ var confessionsPage = {
         });
 
 
+        if (triangle){
+
+            //see if the two top counts are equal
+            if (countArray[0].count === countArray[1].count){
+                //if they are, return an normal triangle
+                return '  <div class="normal-triangle" ></div>\n';
+            }
+
+            return '  <div class="' + countArray[0].headerTriangle + '" ></div>\n';
+        }
+
         //see if the two top counts are equal
         if (countArray[0].count === countArray[1].count){
             //if they are, return an empty string
             return '';
         }
 
-        if (arrow){
-            return '  <div class="' + countArray[0].headerTriangle + '" ></div>\n';
-        }
+
 
         return countArray[0].countHeader;
 
@@ -274,7 +284,7 @@ var confessionsPage = {
     },
 
     //******************************************************************************************************************
-    countUpdated:function (elementID, success, data) {
+    countUpdated:function (countName, itemID, success, data) {
 
         if (!success){
             //the count update failed to post
@@ -289,12 +299,35 @@ var confessionsPage = {
 
         //update successful
 
-        //for now, just reload the confessions
-        //confessionsPage.loadConfessions();
+        //get the edited confession from the local cache
+        var filteredConfessions = globals.confessions.filter(function (confession) {
+            return confession.itemID === itemID;
+        });
 
-        //increment the current count in the element locally
-        var currentCount = Number($$('#' + elementID).html()) ;
-        $$('#' + elementID).html(currentCount + 1);
+        //update the local count
+        switch(countName) {
+            case 'forgiveCount':
+                filteredConfessions[0].forgiveCount ++;
+                break;
+            case 'condemCount':
+                filteredConfessions[0].condemCount ++;
+                break;
+            case 'bsCount':
+                filteredConfessions[0].bsCount ++;
+                break;
+            default:
+                //code block
+        }
+
+
+        //get some freshly formatted html
+        var updatedElement = confessionsPage.confessionItemHTML(filteredConfessions[0]);
+
+        //replace the html in the DOM
+        var oldElementID = '#confession' + itemID
+
+        $(oldElementID).replaceWith(updatedElement);
+
 
     }
 
