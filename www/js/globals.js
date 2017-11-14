@@ -22,8 +22,12 @@ var globals = {
     //set to '000' to show all schools
     confessionSchoolFilter: '000',
 
+    //set to true if we running the Admin Tool
+    isAdim: false,
+
 
     // Persistent Globals
+    seenEULA: null,
     userFirstName: null,
     userSchool: null,
 
@@ -31,6 +35,9 @@ var globals = {
     //******************************************************************************************************************
     initPersistentGlobals: function(){
         //pull all the persistent globals out of persistent storage
+
+        globals.seenEULA = $.jStorage.get('seenEULA');
+        if(!globals.seenEULA){globals.setPersistentGlobal('seenEULA', false)};
 
         globals.userFirstName = $.jStorage.get('userFirstName');
         if(!globals.userFirstName){globals.setPersistentGlobal('userFirstName', 'Anonymous')};
@@ -44,6 +51,7 @@ var globals = {
     resetPersistentGlobals: function(){
         //reset all the persistent globals out of persistent storage
 
+        globals.setPersistentGlobal('seenEULA', false);
         globals.setPersistentGlobal('userFirstName', 'Anonymous');
         globals.setPersistentGlobal('userSchool', '000');
 
@@ -53,6 +61,11 @@ var globals = {
     setPersistentGlobal: function(globalName, globalValue){
 
         switch(globalName) {
+
+            case 'seenEULA':
+                $.jStorage.set('seenEULA', globalValue);
+                globals.seenEULA = globalValue;
+                break;
 
             case 'userFirstName':
                 $.jStorage.set('userFirstName', globalValue);

@@ -1,2 +1,2 @@
-# CollageConfessions
+# CollegeConfessions
 # Go Away

@@ -195,6 +195,13 @@ var app = {
         //save the schools locally so we can use them later
         globals.cc_schools = data;
 
+
+        //make sure the user has agreed to the EULA
+        if (!globals.seenEULA){
+            mainView.router.loadPage({url: 'pages/eula.html', animatePages: true});
+            return;
+        }
+
         //show the confessions
         mainView.router.loadPage({url: 'pages/confessions.html', animatePages: true});
 

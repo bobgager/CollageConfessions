@@ -99,6 +99,11 @@ var newSchoolPage = {
         }
         else {
 
+            if (globals.isAdim) {
+                mainView.router.loadPage({url: 'confessions.html', animatePages: true});
+                return;
+            }
+
             //show the confessions
             mainView.router.loadPage({url: 'pages/confessions.html', animatePages: true});
         }

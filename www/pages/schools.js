@@ -23,6 +23,16 @@ var schoolsPage = {
     //******************************************************************************************************************
     buildSchoolList: function () {
 
+        //sort ascending by the school name
+        globals.cc_schools.sort(function(a, b){
+            var nameA=a.schoolName, nameB=b.schoolName
+            if (nameA > nameB) //sort  descending
+                return 1
+            if (nameA < nameB)
+                return -1
+            return 0 //default return value (no sorting)
+        });
+
 
         schoolListHTML = '';
 
@@ -71,6 +81,12 @@ var schoolsPage = {
         }
         else {
 
+            if (globals.isAdim){
+                //show the confessions
+                mainView.router.loadPage({url: 'confessions.html', animatePages: true});
+                return;
+            }
+
             //show the confessions
             mainView.router.loadPage({url: 'pages/confessions.html', animatePages: true});
         }
@@ -78,6 +94,13 @@ var schoolsPage = {
 
     //******************************************************************************************************************
     newSchool: function () {
+
+        if (globals.isAdim) {
+            mainView.router.loadPage({url: 'CollegeConfessionsMobile/www/pages/new_school.html', animatePages: true});
+            return;
+        }
+
+
         mainView.router.loadPage({url: 'pages/new_school.html', animatePages: true});
     }
 

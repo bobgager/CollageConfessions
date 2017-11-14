@@ -14,13 +14,15 @@ myApp.onPageInit('confessions', function (page) {
 
 myApp.onPageBeforeAnimation('confessions', function(page) {
 
-    confessionsPage.loadConfessions(globals.userSchool.itemID);
+    confessionsPage.loadConfessions();
 
     globals.confessing = false;
 
 });
 
 myApp.onPageAfterAnimation('confessions', function(page) {
+
+
 
 
 });
@@ -148,27 +150,70 @@ var confessionsPage = {
 
         var confessionListHTML = '';
 
-        data.forEach(function (confession, index) {
-            confessionListHTML += confessionsPage.confessionItemHTML(confession);
-        });
+        for (i = 0; i < data.length; i++) {
+
+            //filter down to the school for this confession
+            var selectedSchoolArray = globals.cc_schools.filter(function (school) {
+                return school.itemID === data[i].schoolID;
+            });
+            //if selectedSchoolArray is empty, it means a school was added after the last time globals.cc_schools was updated
+            //and a confession for that school was entered
+            //which results in a hang below when trying to display the schoolName for a school that is localy undefined.
+            //need to re-read the schools in this case, and then re-load the confessions
+
+            if (selectedSchoolArray.length === 0){
+                //need to refresh the schools
+
+                //fetch the list of schools
+
+                myApp.showPreloader('Refreshing Schools')
+                setTimeout(function () {
+                    myApp.hidePreloader();
+                }, 1000);
+
+                awsConnector.fetchSchools(confessionsPage.schoolsReturned);
+                break;
+            }
+
+            confessionListHTML += confessionsPage.confessionItemHTML(data[i], selectedSchoolArray[0].schoolName);
+
+        }
 
         $$('#confessionList').html(confessionListHTML);
 
     },
 
     //******************************************************************************************************************
-    confessionItemHTML: function (confession) {
+    schoolsReturned: function (success, data) {
+        if (!success){
+            //data contains the error message
+            //console.log(data);
 
-        var selectedSchoolArray = globals.cc_schools.filter(function (school) {
-            return school.itemID === confession.schoolID;
-        });
+            //tell the user about the error
+
+            myApp.alert('There was an error loading the list of schools from The Cloud.<br>Please make sure you are connected to the internet and click OK to try again.<br>' + data, 'Error Loading Schools!', function () {
+                awsConnector.fetchSchools(confessionsPage.schoolsReturned);
+            });
+
+            return;
+        }
+
+        //save the schools locally so we can use them later
+        globals.cc_schools = data;
+
+        //reload the confessions
+        confessionsPage.loadConfessions();
+    },
+
+    //******************************************************************************************************************
+    confessionItemHTML: function (confession, schoolName) {
 
         confessionItemHTML = '' +
             '<li id="confession' + confession.itemID + '" class="card facebook-card black-border margin-r-l-0 " style="background-color: rgba(153,153,153,0.3)">\n' +
             '  <div class="card-header ' + confessionsPage.headerClass(confession, false) + ' " >\n' +
             '    <div class="facebook-avatar"><img src="img/anonymous.png" width="34" height="34"></div>\n' +
             '    <div class="facebook-name row">Anonymous<span class="facebook-date">' + cobaltfireUtils.daysAgo(confession.createTime) + '</span></div>\n' +
-            '    <div class="facebook-date">' + selectedSchoolArray[0].schoolName + '</div>\n' +
+            '    <div class="facebook-date">' + schoolName + '</div>\n' +
             '  </div>\n' +
             confessionsPage.headerClass(confession, true) +
             '  <div class="card-content ">\n' +
