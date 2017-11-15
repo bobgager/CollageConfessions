@@ -117,6 +117,16 @@ var confessionsPage = {
 
         }
 
+        //hide the reported confessions if needed
+        if (globals.hideReported){
+            //we need to filter
+
+            data = data.filter(function (confession) {
+                return !confession.reported ;
+            });
+
+        }
+
         if (data.length === 0){
             //tell the user there are no confessions
             var noConfessionsHTML = '' +
@@ -223,6 +233,7 @@ var confessionsPage = {
             '    <a href="#" class="link forgive-color" onclick="confessionsPage.incrementCount(&#39;forgiveCount&#39;,&#39;' + confession.itemID + '&#39;,' + confession.forgiveCount + ')"><i class="fa fa-heart-o"></i>&nbsp;&nbsp;Forgive<span       class="forgive-count">' + confession.forgiveCount + '</span></a>\n' +
             '    <a href="#" class="link condem-color"  onclick="confessionsPage.incrementCount(&#39;condemCount&#39;,&#39;'  + confession.itemID + '&#39;,' + confession.condemCount + ')"> <i class="fa fa-thumbs-o-down"></i>&nbsp;&nbsp;Condem<span  class="condem-count">'  + confession.condemCount + '</span></a>\n' +
             '    <a href="#" class="link bs-color"      onclick="confessionsPage.incrementCount(&#39;bsCount&#39;,&#39;'      + confession.itemID + '&#39;,' + confession.bsCount + ')">     <i class="fa fa-hand-stop-o"></i>&nbsp;&nbsp;Bull Shit<span class="bs-count">'      + confession.bsCount + '</span></a>\n' +
+            '    <a id="moreLink' + confession.itemID + '" href="#"  style="color: white"      onclick="confessionsPage.moreLinkClicked(&#39;' + confession.itemID + '&#39;)"><i class="fa fa-ellipsis-h"></i></a>\n' +
             '  </div>\n' +
             '</li>';
 
@@ -336,6 +347,15 @@ var confessionsPage = {
             myApp.modal({
                 title:  'DOH!',
                 text: 'There was an error communicating with The Cloud.<br><br>Please check that you are connected to the internet and try again.<br><br>(Error Code: cu_001)<br>' + data,
+                buttons: [
+                    {
+                        text: 'OK',
+                        bold: true,
+                        onClick: function() {
+
+                        }
+                    }
+                ]
             });
 
             return ;
@@ -374,6 +394,112 @@ var confessionsPage = {
         $(oldElementID).replaceWith(updatedElement);
 
 
+    },
+
+    //******************************************************************************************************************
+    moreLinkClicked: function (itemID) {
+
+        var popoverHTML = '' +
+            '<div class="popover ">'+
+                '<div class="popover-inner">'+
+                    '<div class="list-block">'+
+                        '<ul>'+
+                            '<li><a href="#" class="item-link list-button" onclick="confessionsPage.reportConfession(&#39;' + itemID + '&#39;)">Report Confession</li>'+
+                        '</ul>'+
+                    '</div>'+
+                '</div>'+
+            '</div>';
+
+        myApp.popover(popoverHTML, $$('#moreLink' + itemID));
+    },
+
+    //******************************************************************************************************************
+    reportConfession: function (itemID) {
+
+        myApp.closeModal();
+
+        myApp.confirm('Are you sure you want to report this confession?</br>By reporting a confession, you are indicating that it violates the Terms of Use.', 'Report Confession?', function () {
+            awsConnector.reportConfession(itemID, confessionsPage.confessionReported)
+        });
+
+    },
+
+    //******************************************************************************************************************
+    confessionReported: function (success, data) {
+
+        if (!success){
+            //the confession reporting call failed
+            myApp.modal({
+                title:  'DOH!',
+                text: 'There was an error communicating with The Cloud.<br><br>Please check that you are connected to the internet and try again.<br><br>(Error Code: cr_001)<br>' + data ,
+                buttons: [
+                    {
+                        text: 'OK',
+                        bold: true,
+                        onClick: function() {
+
+                        }
+                    }
+                ]
+            });
+
+            return ;
+
+        }
+
+        //confession successfully reported
+
+        var popupHTML = '' +
+            '<div class="popup">'+
+                '<div class="content-block">' +
+                    '<div class="center-wrapper">\n' +
+                        '<div class="centered-div">\n' +
+
+                            '<h2>Confession Reported</h2>'+
+
+                            '<p>Thank you for reporting this confession. We&#39;ll take a look and take apropriate action.</p>'+
+
+                            '<p>If you want, you can choose to hide all reported confessions from your Confession Feed</p>'+
+
+                        '      <div class="item-content">\n' +
+                        '        <div class="item-inner">\n' +
+                        '          <div class="item-title label">Hide Reported Confessions: </div>\n' +
+                        '          <div class="item-input">\n' +
+                        '            <label class="label-switch">\n' +
+                        '              <input id="hideReportedCBX" onchange="confessionsPage.setHideReported()" type="checkbox">\n' +
+                        '              <div class="checkbox"></div>\n' +
+                        '            </label>\n' +
+                        '          </div>\n' +
+                        '        </div>\n' +
+                        '      </div>'+
+
+                             '<p><a href="#" class="close-popup button">Done</a></p>'+
+
+                        '</div>\n' +
+                    '</div>'+
+
+
+
+                '</div>'+
+            '</div>'
+        myApp.popup(popupHTML);
+
+        //set the Hide Reported checkbox of the popup
+        $$('#hideReportedCBX').prop('checked', globals.hideReported);
+
+    },
+
+    //******************************************************************************************************************
+    setHideReported: function () {
+        if ($('#hideReportedCBX').is(":checked")) {
+            // it is checked
+            globals.setPersistentGlobal('hideReported', true);
+
+            confessionsPage.loadConfessions();
+        }
+        else {
+            globals.setPersistentGlobal('hideReported', false);
+        }
     }
 
 

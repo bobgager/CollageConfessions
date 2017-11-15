@@ -64,6 +64,15 @@ var newSchoolPage = {
             myApp.modal({
                 title:  'DOH!',
                 text: 'There was an error communicating with The Cloud.<br><br>Please check that you are connected to the internet and try again.<br><br>(Error Code: nsa_001)<br>' + data,
+                buttons: [
+                    {
+                        text: 'OK',
+                        bold: true,
+                        onClick: function() {
+
+                        }
+                    }
+                ]
             });
 
             return ;

@@ -1,7 +1,7 @@
 
 var globals = {
 
-    version: 2.051,
+    version: 2.052,
 
     //localDev is programatically set to indicate we're running in a browser
     localDev: false,
@@ -25,8 +25,12 @@ var globals = {
     //set to true if we running the Admin Tool
     isAdim: false,
 
+    //set to true to filter only reported confessions in Admin Tool
+    onlyReportedAdmin: false,
+
 
     // Persistent Globals
+    hideReported: null,
     seenEULA: null,
     userFirstName: null,
     userSchool: null,
@@ -35,6 +39,9 @@ var globals = {
     //******************************************************************************************************************
     initPersistentGlobals: function(){
         //pull all the persistent globals out of persistent storage
+
+        globals.hideReported = $.jStorage.get('hideReported');
+        if(!globals.hideReported){globals.setPersistentGlobal('hideReported', false)};
 
         globals.seenEULA = $.jStorage.get('seenEULA');
         if(!globals.seenEULA){globals.setPersistentGlobal('seenEULA', false)};
@@ -51,6 +58,7 @@ var globals = {
     resetPersistentGlobals: function(){
         //reset all the persistent globals out of persistent storage
 
+        globals.setPersistentGlobal('hideReported', false);
         globals.setPersistentGlobal('seenEULA', false);
         globals.setPersistentGlobal('userFirstName', 'Anonymous');
         globals.setPersistentGlobal('userSchool', '000');
@@ -61,6 +69,11 @@ var globals = {
     setPersistentGlobal: function(globalName, globalValue){
 
         switch(globalName) {
+
+            case 'hideReported':
+                $.jStorage.set('hideReported', globalValue);
+                globals.hideReported = globalValue;
+                break;
 
             case 'seenEULA':
                 $.jStorage.set('seenEULA', globalValue);

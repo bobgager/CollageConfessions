@@ -171,6 +171,35 @@ var awsConnector = {
     },
 
     //!******************************************************************************************************************
+    reportConfession: function(itemID, callback){
+
+        var now = new Date();
+
+        var params = {
+            TableName: 'cc_confessions_schools',
+            Key: { itemType : 'confession', itemID: itemID },
+            UpdateExpression: "set reportedTime = :rt, reported=:reported ",
+            ExpressionAttributeValues:{
+                ":rt": now.getTime(),
+                ":reported": true
+            }
+        };
+
+        this.dynamodbEast.update(params, function(err, data) {
+
+            if (err){
+                //console.log(err); // an error occurred
+                callback (false, err);
+            }
+            else {
+                //console.log(data);
+                callback(true);
+            }
+        });
+
+    },
+
+    //!******************************************************************************************************************
     updateConfessionCount: function (countName, itemID, currentCount, callback) {
 
 
@@ -209,7 +238,7 @@ var awsConnector = {
                 break;
 
             default:
-                //code block
+            //code block
         }
 
 

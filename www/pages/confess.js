@@ -45,6 +45,15 @@ var confessPage = {
             myApp.modal({
                 title:  'DOH!',
                 text: 'There was an error communicating with The Cloud.<br><br>Please check that you are connected to the internet and try again.<br><br>(Error Code: cp_001)<br>' + data,
+                buttons: [
+                    {
+                        text: 'OK',
+                        bold: true,
+                        onClick: function() {
+
+                        }
+                    }
+                ]
             });
 
             return ;
