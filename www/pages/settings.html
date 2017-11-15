@@ -16,81 +16,39 @@
 <div class="pages">
     <div class="page navbar-fixed  page-bg" data-page="settings">
 
-<!--        <div class="toolbar tabbar">
+        <div class="toolbar tabbar">
             <div class="toolbar-inner">
-                <a href="#" class="tab-link active" onclick="settingsPage.saveChanges()">
-                    <i class="fa fa-save">&nbsp;&nbsp;Save Changes</i>
+                <a href="#" class="tab-link active" onclick="mainView.router.loadPage({url: 'pages/confessions.html', animatePages: true});">
+                    DONE
                 </a>
             </div>
-        </div>-->
+        </div>
 
 
         <div class="page-content">
 
-            <div class="max-width-center mt-50">
 
-                <div class="card">
-<!--                    <div  class="card-header">
-                        <div id="settings_card_header" class="text-center" style="width: 100%">A Final Check...</div>
-                    </div>-->
-                    <div class="card-content">
+            <div class="content-block-title">Confessions:</div>
+            <div class="list-block inset">
+                <ul>
 
-                        <div class="list-block">
-                            <ul>
-<!--                                <li class="item-divider">Your Info</li>-->
-                                <!-- Text inputs -->
-                                <li>
-                                    <div class="item-content">
-                                        <div class="item-inner">
-                                            <div class="item-title label">Hide Reported:</div>
-                                            <div class="item-input">
-                                                <label class="label-switch">
-                                                    <input id="hideReportedSettingsCBX" type="checkbox" onchange="settingsPage.setHideReported()">
-                                                    <div class="checkbox"></div>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-
-
-
-<!--                                <li class="item-divider">iQueue Mobile Configuration</li>
-                                &lt;!&ndash; Config Code &ndash;&gt;
-                                <li>
-                                    <div class="item-content">
-                                        <div class="item-inner">
-                                            <div class="item-title label">Code:</div>
-                                            <div class="item-input">
-                                                <input id="settings_ConfigCodeInput" type="text" placeholder="Not Set" readonly>
-                                            </div>
-                                            <p style="width: 200px"><a href="#" class="button prompt-ResetConfig-BTN">RESET</a></p>
-                                        </div>
-                                    </div>
-                                </li>-->
-
-                                <!--some extra space at the bottom-->
-                                <li class="item-divider"> </li>
-
-                            </ul>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">Hide Reported:</div>
+                                <div class="item-input">
+                                    <label class="label-switch">
+                                        <input id="hideReportedSettingsCBX" type="checkbox" onchange="settingsPage.setHideReported()">
+                                        <div class="checkbox"></div>
+                                    </label>
+                                </div>
+                            </div>
                         </div>
+                    </li>
 
-                    </div>
-                    <div class="card-footer card-footer-with-button">
-                        <div><!--an empty div to cause the middle item to be centered--></div>
-                        <div class="list-block  ">
-                            <ul>
-                                <li>
-                                    <a href="#" class="item-link item-content button" onclick="mainView.router.loadPage({url: 'pages/confessions.html', animatePages: true});" >
-                                        Done
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div><!--an empty div to cause the middle item to be centered--></div>
-                    </div>
-                </div>
 
+
+                </ul>
             </div>
 
         </div>

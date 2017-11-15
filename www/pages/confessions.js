@@ -230,10 +230,10 @@ var confessionsPage = {
             '       <div>' + confession.confession + '</div>\n' +
             '   </div>\n' +
             '  <div class="card-footer ">\n' +
-            '    <a href="#" class="link forgive-color" onclick="confessionsPage.incrementCount(&#39;forgiveCount&#39;,&#39;' + confession.itemID + '&#39;,' + confession.forgiveCount + ')"><i class="fa fa-heart-o"></i>&nbsp;&nbsp;Forgive<span       class="forgive-count">' + confession.forgiveCount + '</span></a>\n' +
-            '    <a href="#" class="link condem-color"  onclick="confessionsPage.incrementCount(&#39;condemCount&#39;,&#39;'  + confession.itemID + '&#39;,' + confession.condemCount + ')"> <i class="fa fa-thumbs-o-down"></i>&nbsp;&nbsp;Condem<span  class="condem-count">'  + confession.condemCount + '</span></a>\n' +
-            '    <a href="#" class="link bs-color"      onclick="confessionsPage.incrementCount(&#39;bsCount&#39;,&#39;'      + confession.itemID + '&#39;,' + confession.bsCount + ')">     <i class="fa fa-hand-stop-o"></i>&nbsp;&nbsp;Bull Shit<span class="bs-count">'      + confession.bsCount + '</span></a>\n' +
-            '    <a id="moreLink' + confession.itemID + '" href="#"  style="color: white"      onclick="confessionsPage.moreLinkClicked(&#39;' + confession.itemID + '&#39;)"><i class="fa fa-ellipsis-h"></i></a>\n' +
+            '    <a href="#" class="link forgive-color" onclick="confessionsPage.incrementCount(&#39;forgiveCount&#39;,&#39;' + confession.itemID + '&#39;,' + confession.forgiveCount + ')">Forgive&nbsp;&nbsp;<span       class="forgive-count">' + confession.forgiveCount + '</span></a>\n' +
+            '    <a href="#" class="link condem-color"  onclick="confessionsPage.incrementCount(&#39;condemCount&#39;,&#39;'  + confession.itemID + '&#39;,' + confession.condemCount + ')">Condem&nbsp;&nbsp;<span  class="condem-count">'  + confession.condemCount + '</span></a>\n' +
+            '    <a href="#" class="link bs-color"      onclick="confessionsPage.incrementCount(&#39;bsCount&#39;,&#39;'      + confession.itemID + '&#39;,' + confession.bsCount + ')">Bull Shit&nbsp;&nbsp;<span class="bs-count">'      + confession.bsCount + '</span></a>\n' +
+            '    <a id="moreLink' + confession.itemID + '" href="#"  style="color: white"      onclick="confessionsPage.moreLinkClicked(&#39;' + confession.itemID + '&#39;)">&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-ellipsis-h">&nbsp;</i></a>\n' +
             '  </div>\n' +
             '</li>';
 
@@ -453,7 +453,7 @@ var confessionsPage = {
             '<div class="popup">'+
                 '<div class="content-block">' +
                     '<div class="center-wrapper">\n' +
-                        '<div class="centered-div">\n' +
+                        '<div class="centered-div" style="color: black">\n' +
 
                             '<h2>Confession Reported</h2>'+
 
@@ -477,8 +477,6 @@ var confessionsPage = {
 
                         '</div>\n' +
                     '</div>'+
-
-
 
                 '</div>'+
             '</div>'
