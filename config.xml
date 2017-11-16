@@ -59,6 +59,14 @@
         <icon src="res/icon/ios/icon-40@2x.png" width="80" height="80" />
         <icon src="res/icon/ios/icon-40@3x.png" width="120" height="120" />
 
+        <!--more icons required by Apple-->
+        <icon src="res/icon/ios/icon.png" width="57" height="57" />
+        <icon src="res/icon/ios/icon@2x.png" width="114" height="114" />
+        <icon src="res/icon/ios/icon-72.png" width="72" height="72" />
+        <icon src="res/icon/ios/icon-72@2x.png" width="144" height="144" />
+        <icon src="res/icon/ios/icon-small-50.png" width="50" height="50" />
+        <icon src="res/icon/ios/icon-small-50@2x.png" width="100" height="100" />
+
     </platform>
 
     <platform name="android">
