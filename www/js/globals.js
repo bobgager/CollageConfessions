@@ -1,7 +1,7 @@
 
 var globals = {
 
-    version: 2.053,
+    version: 2.054,
 
     //localDev is programatically set to indicate we're running in a browser
     localDev: false,
@@ -30,15 +30,20 @@ var globals = {
 
 
     // Persistent Globals
+    hiddenConfessions: null,
     hideReported: null,
     seenEULA: null,
     userFirstName: null,
+    userGUID: null,
     userSchool: null,
 
 
     //******************************************************************************************************************
     initPersistentGlobals: function(){
         //pull all the persistent globals out of persistent storage
+
+        globals.hiddenConfessions = $.jStorage.get('hiddenConfessions');
+        if(!globals.hiddenConfessions){globals.setPersistentGlobal('hiddenConfessions', [])};
 
         globals.hideReported = $.jStorage.get('hideReported');
         if(!globals.hideReported){globals.setPersistentGlobal('hideReported', false)};
@@ -49,6 +54,9 @@ var globals = {
         globals.userFirstName = $.jStorage.get('userFirstName');
         if(!globals.userFirstName){globals.setPersistentGlobal('userFirstName', 'Anonymous')};
 
+        globals.userGUID = $.jStorage.get('userGUID');
+        if(!globals.userGUID){globals.setPersistentGlobal('userGUID', cobaltfireUtils.guid())};
+
         globals.userSchool = $.jStorage.get('userSchool');
         if(!globals.userSchool){globals.setPersistentGlobal('userSchool', '000')};
 
@@ -58,9 +66,11 @@ var globals = {
     resetPersistentGlobals: function(){
         //reset all the persistent globals out of persistent storage
 
+        globals.setPersistentGlobal('hiddenConfessions', []);
         globals.setPersistentGlobal('hideReported', false);
         globals.setPersistentGlobal('seenEULA', false);
         globals.setPersistentGlobal('userFirstName', 'Anonymous');
+        globals.setPersistentGlobal('userGUID', cobaltfireUtils.guid())
         globals.setPersistentGlobal('userSchool', '000');
 
     },
@@ -69,6 +79,11 @@ var globals = {
     setPersistentGlobal: function(globalName, globalValue){
 
         switch(globalName) {
+
+            case 'hiddenConfessions':
+                $.jStorage.set('hiddenConfessions', globalValue);
+                globals.hiddenConfessions = globalValue;
+                break;
 
             case 'hideReported':
                 $.jStorage.set('hideReported', globalValue);
@@ -83,6 +98,11 @@ var globals = {
             case 'userFirstName':
                 $.jStorage.set('userFirstName', globalValue);
                 globals.userFirstName = globalValue;
+                break;
+
+            case 'userGUID':
+                $.jStorage.set('userGUID', globalValue);
+                globals.userGUID = globalValue;
                 break;
 
             case 'userSchool':

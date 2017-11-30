@@ -111,6 +111,10 @@ Usage example
     opacity: 0.9;
 }
 
+.text-small {
+    font-size: small;
+}
+
 .card-header-link {
     width: 100%;
 }

@@ -32,6 +32,7 @@ var confessPage = {
         newConfession.forgiveCount = 0;
         newConfession.condemCount = 0;
         newConfession.bsCount = 0;
+        newConfession.userGUID = globals.userGUID;
 
         awsConnector.postConfession(newConfession, confessPage.confessionPosted);
 

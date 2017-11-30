@@ -127,6 +127,14 @@ var confessionsPage = {
 
         }
 
+        //filter out the confessions this user has explicitly marked as hidden
+
+        data = data.filter(function (confession) {
+            return    globals.hiddenConfessions.indexOf(confession.itemID) === -1    ;
+        });
+
+
+
         if (data.length === 0){
             //tell the user there are no confessions
             var noConfessionsHTML = '' +
@@ -404,6 +412,8 @@ var confessionsPage = {
                 '<div class="popover-inner">'+
                     '<div class="list-block">'+
                         '<ul>'+
+                            '<li><a href="#" class="item-link list-button" onclick="confessionsPage.blockUser(&#39;' + itemID + '&#39;)">Block User</li>'+
+                            '<li><a href="#" class="item-link list-button" onclick="confessionsPage.hideConfession(&#39;' + itemID + '&#39;)">Hide Confession</li>'+
                             '<li><a href="#" class="item-link list-button" onclick="confessionsPage.reportConfession(&#39;' + itemID + '&#39;)">Report Confession</li>'+
                         '</ul>'+
                     '</div>'+
@@ -420,6 +430,35 @@ var confessionsPage = {
 
         myApp.confirm('Are you sure you want to report this confession?</br>By reporting a confession, you are indicating that it violates the Terms of Use.', 'Report Confession?', function () {
             awsConnector.reportConfession(itemID, confessionsPage.confessionReported)
+        });
+
+    },
+
+    //******************************************************************************************************************
+    hideConfession: function (itemID) {
+
+        myApp.closeModal();
+
+        myApp.confirm('Are you sure you want to hide this confession?</br>By hiding a confession, it will be removed from your Confession Feed and you will never see it again.', 'Hide Confession?', function () {
+
+            globals.hiddenConfessions.push(itemID)
+            globals.setPersistentGlobal('hiddenConfessions', globals.hiddenConfessions);
+
+            //and now hide it in the UI
+            $('#confession' + itemID).fadeOut(2000);
+
+        });
+
+    },
+
+    //******************************************************************************************************************
+    blockUser: function (itemID) {
+
+        myApp.closeModal();
+
+        myApp.confirm('Are you sure you want to block this user?</br>By blocking a user, all of their confessions will be removed from your Confession Feed.', 'Block User?', function () {
+
+
         });
 
     },
