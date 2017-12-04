@@ -33,6 +33,7 @@ var confessPage = {
         newConfession.condemCount = 0;
         newConfession.bsCount = 0;
         newConfession.userGUID = globals.userGUID;
+        newConfession.userName = globals.userName;
 
         awsConnector.postConfession(newConfession, confessPage.confessionPosted);
 

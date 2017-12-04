@@ -1,7 +1,7 @@
 
 var globals = {
 
-    version: 2.054,
+    version: 2.055,
 
     //localDev is programatically set to indicate we're running in a browser
     localDev: false,
@@ -30,11 +30,12 @@ var globals = {
 
 
     // Persistent Globals
+    blockedUsers: null,
     hiddenConfessions: null,
     hideReported: null,
     seenEULA: null,
-    userFirstName: null,
     userGUID: null,
+    userName: null,
     userSchool: null,
 
 
@@ -42,23 +43,26 @@ var globals = {
     initPersistentGlobals: function(){
         //pull all the persistent globals out of persistent storage
 
+        globals.blockedUsers = $.jStorage.get('blockedUsers');
+        if(!globals.blockedUsers){globals.setPersistentGlobal('blockedUsers', [])}
+
         globals.hiddenConfessions = $.jStorage.get('hiddenConfessions');
-        if(!globals.hiddenConfessions){globals.setPersistentGlobal('hiddenConfessions', [])};
+        if(!globals.hiddenConfessions){globals.setPersistentGlobal('hiddenConfessions', [])}
 
         globals.hideReported = $.jStorage.get('hideReported');
-        if(!globals.hideReported){globals.setPersistentGlobal('hideReported', false)};
+        if(!globals.hideReported){globals.setPersistentGlobal('hideReported', false)}
 
         globals.seenEULA = $.jStorage.get('seenEULA');
-        if(!globals.seenEULA){globals.setPersistentGlobal('seenEULA', false)};
-
-        globals.userFirstName = $.jStorage.get('userFirstName');
-        if(!globals.userFirstName){globals.setPersistentGlobal('userFirstName', 'Anonymous')};
+        if(!globals.seenEULA){globals.setPersistentGlobal('seenEULA', false)}
 
         globals.userGUID = $.jStorage.get('userGUID');
-        if(!globals.userGUID){globals.setPersistentGlobal('userGUID', cobaltfireUtils.guid())};
+        if(!globals.userGUID){globals.setPersistentGlobal('userGUID', cobaltfireUtils.guid())}
+
+        globals.userName = $.jStorage.get('userName');
+        if(!globals.userName){globals.setPersistentGlobal('userName', 'Anonymous')}
 
         globals.userSchool = $.jStorage.get('userSchool');
-        if(!globals.userSchool){globals.setPersistentGlobal('userSchool', '000')};
+        if(!globals.userSchool){globals.setPersistentGlobal('userSchool', '000')}
 
     },
 
@@ -66,11 +70,12 @@ var globals = {
     resetPersistentGlobals: function(){
         //reset all the persistent globals out of persistent storage
 
+        globals.setPersistentGlobal('blockedUsers', []);
         globals.setPersistentGlobal('hiddenConfessions', []);
         globals.setPersistentGlobal('hideReported', false);
         globals.setPersistentGlobal('seenEULA', false);
-        globals.setPersistentGlobal('userFirstName', 'Anonymous');
-        globals.setPersistentGlobal('userGUID', cobaltfireUtils.guid())
+        globals.setPersistentGlobal('userGUID', cobaltfireUtils.guid());
+        globals.setPersistentGlobal('userName', 'Anonymous');
         globals.setPersistentGlobal('userSchool', '000');
 
     },
@@ -79,6 +84,11 @@ var globals = {
     setPersistentGlobal: function(globalName, globalValue){
 
         switch(globalName) {
+
+            case 'blockedUsers':
+                $.jStorage.set('blockedUsers', globalValue);
+                globals.blockedUsers = globalValue;
+                break;
 
             case 'hiddenConfessions':
                 $.jStorage.set('hiddenConfessions', globalValue);
@@ -95,14 +105,14 @@ var globals = {
                 globals.seenEULA = globalValue;
                 break;
 
-            case 'userFirstName':
-                $.jStorage.set('userFirstName', globalValue);
-                globals.userFirstName = globalValue;
-                break;
-
             case 'userGUID':
                 $.jStorage.set('userGUID', globalValue);
                 globals.userGUID = globalValue;
+                break;
+
+            case 'userName':
+                $.jStorage.set('userName', globalValue);
+                globals.userName = globalValue;
                 break;
 
             case 'userSchool':

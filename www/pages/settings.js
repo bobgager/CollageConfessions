@@ -22,6 +22,21 @@ myApp.onPageBeforeAnimation('settings', function(page) {
     }
 
 
+    //show how many Users this user has blocked
+    $$('#blockedUserCount').html(globals.blockedUsers.length);
+
+    //show or hide the blocked users reset button
+    if (globals.blockedUsers.length === 0){
+        $$('#resetBlockedUsersLink').hide();
+    }
+    else {
+        $$('#resetBlockedUsersLink').show();
+    }
+
+    //show the users userName
+    $$('#userNameInput').val(globals.userName);
+
+
 });
 
 var settingsPage = {
@@ -40,7 +55,7 @@ var settingsPage = {
 
     //******************************************************************************************************************
     showID: function () {
-        myApp.alert(globals.userGUID,'Anonymous ID' );
+        myApp.alert(globals.userGUID,'Sync ID' );
     },
 
     //******************************************************************************************************************
@@ -56,6 +71,27 @@ var settingsPage = {
             $$('#resetHiddenConfessionsLink').hide();
 
         });
+    },
+
+    //******************************************************************************************************************
+    resetBlockedUsers: function () {
+        myApp.confirm('Are you sure you want to clear the list of Blocked Users?</br>All users you have previously requested to be blocked will now be shown.', 'Unblock Users?', function () {
+
+            //clear the blocked users list
+            globals.setPersistentGlobal('blockedUsers', []);
+
+            //show how many confessions this user has hidden
+            $$('#blockedUserCount').html(globals.blockedUsers.length);
+
+            $$('#resetBlockedUsersLink').hide();
+
+        });
+    },
+
+    //******************************************************************************************************************
+    setUserName: function () {
+        globals.setPersistentGlobal('userName', $$('#userNameInput').val())
+        $$('#rightPanelGreeting').html('Hello ' + globals.userName );
     }
 
 

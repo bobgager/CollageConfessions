@@ -133,6 +133,12 @@ var confessionsPage = {
             return    globals.hiddenConfessions.indexOf(confession.itemID) === -1    ;
         });
 
+        //filter out the users this user has explicitly blocked
+
+        data = data.filter(function (confession) {
+            return    globals.blockedUsers.indexOf(confession.userGUID) === -1    ;
+        });
+
 
 
         if (data.length === 0){
@@ -226,11 +232,16 @@ var confessionsPage = {
     //******************************************************************************************************************
     confessionItemHTML: function (confession, schoolName) {
 
+        //TODO: can get rid of this once all the confessions without user names have been recyled
+        if (!confession.userName){
+            confession.userName = 'Anonymous';
+        }
+
         confessionItemHTML = '' +
             '<li id="confession' + confession.itemID + '" class="card facebook-card black-border margin-r-l-0 " style="background-color: rgba(153,153,153,0.3)">\n' +
             '  <div class="card-header ' + confessionsPage.headerClass(confession, false) + ' " >\n' +
             '    <div class="facebook-avatar"><img src="img/anonymous.png" width="34" height="34"></div>\n' +
-            '    <div class="facebook-name row">Anonymous<span class="facebook-date">' + cobaltfireUtils.daysAgo(confession.createTime) + '</span></div>\n' +
+            '    <div class="facebook-name row">'+ confession.userName +'<span class="facebook-date">' + cobaltfireUtils.daysAgo(confession.createTime) + '</span></div>\n' +
             '    <div class="facebook-date">' + schoolName + '</div>\n' +
             '  </div>\n' +
             confessionsPage.headerClass(confession, true) +
@@ -393,8 +404,36 @@ var confessionsPage = {
         }
 
 
+
+        //filter down to the school for this confession
+        var selectedSchoolArray = globals.cc_schools.filter(function (school) {
+            return school.itemID === filteredConfessions[0].schoolID;
+        });
+        //if selectedSchoolArray is empty, it means a school was added after the last time globals.cc_schools was updated
+        //and a confession for that school was entered
+        //which results in a hang below when trying to display the schoolName for a school that is localy undefined.
+        //need to re-read the schools in this case, and then re-load the confessions
+
+        if (selectedSchoolArray.length === 0){
+            //need to refresh the schools
+
+            //fetch the list of schools
+
+            myApp.showPreloader('Refreshing Schools')
+            setTimeout(function () {
+                myApp.hidePreloader();
+            }, 1000);
+
+            awsConnector.fetchSchools(confessionsPage.schoolsReturned);
+            return;
+        }
+
+
+
+
+
         //get some freshly formatted html
-        var updatedElement = confessionsPage.confessionItemHTML(filteredConfessions[0]);
+        var updatedElement = confessionsPage.confessionItemHTML(filteredConfessions[0],selectedSchoolArray[0].schoolName);
 
         //replace the html in the DOM
         var oldElementID = '#confession' + itemID
@@ -458,6 +497,16 @@ var confessionsPage = {
 
         myApp.confirm('Are you sure you want to block this user?</br>By blocking a user, all of their confessions will be removed from your Confession Feed.', 'Block User?', function () {
 
+            //filter down to this confession
+            var selectedConfessionArray = globals.confessions.filter(function (confession) {
+                return confession.itemID === itemID;
+            });
+
+
+            globals.blockedUsers.push(selectedConfessionArray[0].userGUID);
+            globals.setPersistentGlobal('blockedUsers', globals.blockedUsers);
+
+            confessionsPage.loadConfessions();
 
         });
 

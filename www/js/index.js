@@ -161,7 +161,7 @@ var app = {
         //pull in the persistent globals from long term storage
         globals.initPersistentGlobals();
 
-        $$('#rightPanelGreeting').html('Hello ' + globals.userFirstName );
+        $$('#rightPanelGreeting').html('Hello ' + globals.userName );
 
        if(globals.userSchool === '000'){
            $$('#menu_UserSchool').html('Not Selected');

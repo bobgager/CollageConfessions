@@ -55,11 +55,31 @@
                         </div>
                     </li>
 
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">Blocked Users:</div>
+                                <div><span id="blockedUserCount">0</span>&nbsp;&nbsp;<a id="resetBlockedUsersLink" href="#" class="link text-small" onclick="settingsPage.resetBlockedUsers()">Reset</a></div>
+                            </div>
+                        </div>
+                    </li>
 
                     <li>
                         <div class="item-content">
                             <div class="item-inner">
-                                <div class="item-title label">Anonymous ID:</div>
+                                <div class="item-title label">User Name:</div>
+                                <input id="userNameInput" type="text" onchange="settingsPage.setUserName()">
+                            </div>
+                        </div>
+                        <div class="item-content text-small">
+                            Not to worry. You can set a User Name for your confessions, but you'll still be anonymous.
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">Sync ID:</div>
                                 <p><a href="#" class="button" onclick="settingsPage.showID()">Show ID</a></p>
                             </div>
                         </div>

@@ -145,7 +145,7 @@ var awsConnector = {
         var params = {
             TableName: 'cc_confessions_schools',
             Key: { itemType : 'confession', itemID: confession.itemID },
-            UpdateExpression: "set createTime = :ct, confession=:confession, schoolID=:schoolID, forgiveCount=:forgiveCount, condemCount=:condemCount, bsCount=:bsCount, userGUID=:userGUID ",
+            UpdateExpression: "set createTime = :ct, confession=:confession, schoolID=:schoolID, forgiveCount=:forgiveCount, condemCount=:condemCount, bsCount=:bsCount, userGUID=:userGUID, userName=:userName ",
             ExpressionAttributeValues:{
                 ":ct": now.getTime(),
                 ":confession": confession.confession,
@@ -153,7 +153,8 @@ var awsConnector = {
                 ":forgiveCount": confession.forgiveCount,
                 ":condemCount": confession.condemCount,
                 ":bsCount": confession.bsCount,
-                ":userGUID": confession.userGUID
+                ":userGUID": confession.userGUID,
+                ":userName": confession.userName
             }
         };
 
