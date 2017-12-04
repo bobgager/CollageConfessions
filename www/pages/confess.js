@@ -8,6 +8,7 @@ myApp.onPageInit('confess', function (page) {
 myApp.onPageBeforeAnimation('confess', function(page) {
 
     $$('#confessionSchoolName').html(globals.userSchool.schoolName);
+    $$('#userNameConfessPageLabel').html(globals.userName);
 
 });
 
